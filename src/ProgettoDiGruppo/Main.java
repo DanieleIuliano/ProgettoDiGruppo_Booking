@@ -1,14 +1,17 @@
 package ProgettoDiGruppo;
 
+import ProgettoDiGruppo.Classi.Abitazione.Durata;
 import ProgettoDiGruppo.Classi.Gestione.Gestione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-
+/*
         Gestione gestione = new Gestione();
         Scanner scanner = new Scanner(System.in);
         String scelta;
@@ -77,8 +80,20 @@ public class Main {
             }
 
         }
+*/
+        LocalDate data1 = LocalDate.of(2021, 6, 24);
+        LocalDate data2 = LocalDate.of(2021, 8, 24);
+        LocalDate data3 = LocalDate.of(2021, 7, 24);
+        LocalDate data4 = LocalDate.of(2021, 8, 24);
+        Durata calendario1 = new Durata(data1,data2);
+        calendario1.riempiListaDate();
+        System.out.println(calendario1.getDates().toString());
+        calendario1.rimuoviDatePrenotate(data3,data4);
+        System.out.println(calendario1.getDates().toString());
 
     }
+
+
 
 }
 

@@ -99,7 +99,7 @@ public class Abitazione {
     }
 
     public void stampaGiorniDisponibili(){
-        durata.calcoloDurata();
+
     }
 
 }
