@@ -13,6 +13,8 @@ public class DataBase {
     private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
     private Map<String, Host> hostInseriti;
     private Map<String, Set<Prenotazione>> prenotazioniEffettuate;
+    private int mediaPostiLetto;
+    private int numeroAbitazioniInserite = 0;
 
     private static DataBase instance = null;
 
@@ -52,6 +54,14 @@ public class DataBase {
     public void addCasa(Host host, Abitazione abitazione){
 
         caseInserite.put(host.getEmail(), Collections.singleton(abitazione));
+        mediaPostiLetto += abitazione.getNumeroPostiLetto();
+        numeroAbitazioniInserite++;
+
+    }
+
+    public int mediaPostiLetto(){
+
+        return (mediaPostiLetto / numeroAbitazioniInserite);
 
     }
 

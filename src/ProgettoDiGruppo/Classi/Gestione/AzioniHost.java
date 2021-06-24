@@ -315,6 +315,14 @@ public class AzioniHost {
 
         Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano );
         dataBase.addCasa(host, abitazione);
+
+    }
+
+
+    public void inserisciAbitazione(Host host, Abitazione abitazione) {
+
+        dataBase.addCasa(host, abitazione);
+
     }
 
 

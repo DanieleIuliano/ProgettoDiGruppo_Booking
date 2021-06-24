@@ -225,6 +225,12 @@ public class Gestione {
 
     }
 
+    public void abitazioniDiUnHost(Host host){
+
+        System.out.println(dataBase.getCaseInserite().get(host.getEmail()).toString());
+
+    }
+
 
 
 }
