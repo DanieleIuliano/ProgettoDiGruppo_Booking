@@ -4,17 +4,19 @@ import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class Host extends Utente {
 
     private String codiceHost;
-    private int numeroPrenotazioni;
-    private boolean superHost;
+    private int numeroPrenotazioni = 0;
+    private boolean superHost = false;
     private Set<Abitazione> abitazioni = new HashSet<>();
 
     public Host(String nome, String cognome, String email, String indirizzo,String password) {
 
         super(nome, cognome, email, indirizzo,password);
+        codiceHost = UUID.randomUUID().toString();
 
     }
 
