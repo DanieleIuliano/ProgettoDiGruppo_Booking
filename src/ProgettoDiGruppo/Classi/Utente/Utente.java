@@ -66,4 +66,15 @@ public class Utente {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    /******* toString *******/
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", feedBacks=" + feedBacks +
+                '}';
+    }
 }
