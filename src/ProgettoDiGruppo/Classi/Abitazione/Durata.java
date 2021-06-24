@@ -1,11 +1,9 @@
 package ProgettoDiGruppo.Classi.Abitazione;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Stream;
+
 
 public class Durata {
 
@@ -22,7 +20,15 @@ public class Durata {
 
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
+        riempiListaDate();
 
+    }
+
+    @Override
+    public String toString() {
+        return "Durata{" +
+                " dates=" + dates +
+                '}';
     }
 
     /***** Getter e Setter ***/

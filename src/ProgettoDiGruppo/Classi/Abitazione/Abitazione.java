@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class Abitazione {
 
-    private double prezzo;
+    private int prezzo;
     private Durata durata;
     private String id;
     private String nome;
@@ -20,10 +20,10 @@ public class Abitazione {
     private int piano;
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
 
-    public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
+    public Abitazione(int prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
         this.prezzo = prezzo;
         this.durata = new Durata(dataInizio, dataFine);
-        this.id = UUID.randomUUID().toString();
+        id = UUID.randomUUID().toString();
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.numeroLocali = numeroLocali;
@@ -31,11 +31,22 @@ public class Abitazione {
         this.piano = piano;
     }
 
-    //Controlli, AGGIUNTA ID
-    //DATA INIZIO E FINE
-    //TO string
+    @Override
+    public String toString() {
+        return "Abitazione{" +
+                "prezzo=" + prezzo +
+                ", id='" + id + '\'' +
+                ", durata='"+ getDurata().toString() +
+                ", nome='" + nome + '\'' +
+                ", indirizzo='" + indirizzo + '\'' +
+                ", numeroLocali=" + numeroLocali +
+                ", numeroPostiLetto=" + numeroPostiLetto +
+                ", piano=" + piano +
+                ", feedBacksSullAbitazione=" + feedBacksSullAbitazione +
+                '}';
+    }
 
-    public double getPrezzo() {
+    public int getPrezzo() {
         return prezzo;
     }
 
@@ -53,10 +64,6 @@ public class Abitazione {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getNome() {
