@@ -1,6 +1,6 @@
 #Esercizio di Gruppo
 
-<img src="Hotel.jpg"> 
+<img src=".idea/Hotel.jpg"> 
 
 Un facoltoso turista americano ci ha chiesto di creare una piattaforma ispirata ad un famoso sito per affittare
 case vacanza. Tutti possono registrarsi alla piattaforma e, se approvati come host, caricare una o più abitazioni
