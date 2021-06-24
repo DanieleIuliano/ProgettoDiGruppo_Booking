@@ -6,10 +6,11 @@ import ProgettoDiGruppo.Classi.Utente.FeedBack;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public class Abitazione {
 
-    private int prezzo;
+    private double prezzo;
     private Durata durata;
     private String id;
     private String nome;
@@ -19,10 +20,10 @@ public class Abitazione {
     private int piano;
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
 
-    public Abitazione(int prezzo, LocalDate dataInizio, LocalDate dataFine, String id, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
+    public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
         this.prezzo = prezzo;
         this.durata = new Durata(dataInizio, dataFine);
-        this.id = id;
+        this.id = UUID.randomUUID().toString();
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.numeroLocali = numeroLocali;
@@ -34,7 +35,7 @@ public class Abitazione {
     //DATA INIZIO E FINE
     //TO string
 
-    public int getPrezzo() {
+    public double getPrezzo() {
         return prezzo;
     }
 
