@@ -1,6 +1,154 @@
 package ProgettoDiGruppo.Classi.Gestione;
 
+import ProgettoDiGruppo.Classi.Utente.Utente;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
 public class Gestione {
+
+    DataBase dataBase = DataBase.getInstance();
+    Scanner scanner = new Scanner(System.in);
+
+    public void registrazione() {
+
+        String nomeUtente;
+        String cognomeUtente;
+        String email;
+        String password;
+        String indirizzo;
+
+        System.out.println("Procediamo con la registrazione!");
+        while (true) {
+
+            System.out.print("Il tuo nome: ");
+            nomeUtente = scanner.next();
+
+            if (nomeUtente.length() > 2) {
+
+                break;
+
+            }
+
+            System.out.println("ATTENZIONE NOME TROPPO CORTO! ");
+        }
+
+        while (true) {
+
+            System.out.print("Il tuo cognome: ");
+            cognomeUtente = scanner.next();
+
+            if (cognomeUtente.length() > 2) {
+
+                break;
+
+            }
+
+            System.out.println("ATTENZIONE COGNOME TROPPO CORTO! ");
+
+        }
+
+        while (true) {
+
+            System.out.print("Il tuo indirizzo: ");
+            indirizzo = scanner.next();
+
+            if (indirizzo.length() > 2) {
+
+                break;
+
+            }
+
+            System.out.println("ATTENZIONE INDIRIZZO TROPPO CORTO! ");
+
+        }
+
+        while (true) {
+
+            Pattern patternEmail = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}");
+            email = scanner.next();
+
+            if(patternEmail.matcher(email).find())
+
+                break;
+
+            if(dataBase.getUtentiInseriti().containsKey(email)){
+
+                System.out.println("ATTENZIONE EMAIL GIA' Inserita");
+                continue;
+
+            }
+
+            System.out.println("Email non valida, riprova");
+
+
+        }
+
+        while (true) {
+
+            System.out.print("Password: ");
+            password = scanner.next();
+
+            if (password.length() < 8) {
+
+                System.out.println("Password troppo corta");
+                continue;
+
+            }
+
+            break;
+
+        }
+
+        Utente utente = new Utente(nomeUtente, cognomeUtente, email, indirizzo, password);
+        dataBase.addUtente(utente);
+        utente = null;
+
+    }
+
+    public Utente accesso() {
+
+        String codiceFiscale;
+        String password;
+
+        while (true) {
+
+            System.out.print("Codice fiscale: ");
+            codiceFiscale = scanner.next();
+
+            if (codiceFiscale.length() != 16) {
+
+                System.out.println("FORMATO CODICE FISCALE ERRATO");
+                continue;
+
+            }
+
+            break;
+
+        }
+
+        while (true) {
+
+            System.out.print("Password: ");
+            password = scanner.next();
+
+            if (password.length() < 8) {
+
+                System.out.println("FORMATO PASSWORD ERRATO");
+                continue;
+
+            }
+
+            break;
+
+        }
+
+
+        return null;
+
+    }
+
 
 
 }

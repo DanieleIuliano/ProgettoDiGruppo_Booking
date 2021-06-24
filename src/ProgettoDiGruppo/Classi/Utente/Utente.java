@@ -2,6 +2,7 @@ package ProgettoDiGruppo.Classi.Utente;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Utente {
 
@@ -9,15 +10,17 @@ public class Utente {
     private String cognome;
     private String email;
     private String indirizzo;
+    private String password;
     private List<FeedBack> feedBacks = new LinkedList<>();
     private List<Prenotazione> prenotazioni = new LinkedList<>();
 
-    public Utente(String nome, String cognome, String email, String indirizzo) {
+    public Utente(String nome, String cognome, String email, String indirizzo, String password) {
 
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.indirizzo = indirizzo;
+        this.password = password;
 
     }
     //To string
@@ -27,6 +30,7 @@ public class Utente {
     }
 
     public void setNome(String nome) {
+
         this.nome = nome;
     }
 
@@ -43,6 +47,7 @@ public class Utente {
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
@@ -52,5 +57,13 @@ public class Utente {
 
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
