@@ -2,7 +2,6 @@ package ProgettoDiGruppo.Classi.Gestione;
 
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -109,22 +108,19 @@ public class Gestione {
 
     public Utente accesso() {
 
-        String codiceFiscale;
+        String email;
         String password;
 
         while (true) {
 
-            System.out.print("Codice fiscale: ");
-            codiceFiscale = scanner.next();
+            Pattern patternEmail = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}");
+            email = scanner.next();
 
-            if (codiceFiscale.length() != 16) {
+            if(patternEmail.matcher(email).find())
 
-                System.out.println("FORMATO CODICE FISCALE ERRATO");
-                continue;
+                break;
 
-            }
-
-            break;
+            System.out.println("Email errata");
 
         }
 
@@ -144,7 +140,15 @@ public class Gestione {
 
         }
 
+        if(dataBase.getUtentiInseriti().containsKey(email))
 
+            if(dataBase.getUtentiInseriti().get(email).getPassword().equalsIgnoreCase(password)) {
+
+                System.out.println("Accesso effettuato");
+                dataBase.getUtentiInseriti().get(email);
+
+            }
+        System.out.println("Accesso Errato");
         return null;
 
     }

@@ -12,9 +12,9 @@ public class Host extends Utente {
     private boolean superHost;
     private Set<Abitazione> abitazioni = new HashSet<>();
 
-    public Host(String nome, String cognome, String email, String indirizzo) {
+    public Host(String nome, String cognome, String email, String indirizzo, String password) {
 
-        super(nome, cognome, email, indirizzo);
+        super(nome, cognome, email, indirizzo, password);
 
     }
 

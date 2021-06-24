@@ -1,8 +1,84 @@
 package ProgettoDiGruppo;
 
+import ProgettoDiGruppo.Classi.Gestione.Gestione;
+import ProgettoDiGruppo.Classi.Utente.Utente;
+
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
+        Gestione gestione = new Gestione();
+        Scanner scanner = new Scanner(System.in);
+        String scelta;
+        Utente utente = null;
+
+        System.out.println("Benvenuto in Booking\nCosa vuoi fare: ");
+
+        while (true){
+
+            if(utente == null) {
+
+                System.out.println("|Registrazione|\n|Accesso|\n|Exit|");
+                System.out.print("Scelta: ");
+                scelta = scanner.next();
+
+                if(scelta.equalsIgnoreCase("Registrazione")){
+
+                    gestione.registrazione();
+                    continue;
+
+                }
+
+                if(scelta.equalsIgnoreCase("Accesso")){
+
+                    utente = gestione.accesso();
+
+                    if(utente == null){
+
+                        System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
+                        continue;
+
+                    }
+
+                    else {
+
+                        System.out.println("Accesso effettuato");
+                        continue;
+
+                    }
+
+                }
+
+            }
+
+            else {
+
+                System.out.println("Cosa vuoi fare: \n|Prenotazione|\n|Exit|");
+                System.out.print("Scelta: ");
+                scelta = scanner.next();
+
+            }
+
+
+            if(scelta.equalsIgnoreCase("Exit")){
+
+                System.out.println("ARRIVEDERCI!!");
+                break;
+
+            }
+
+            else{
+
+                System.out.println("Scelta non valida!");
+                continue;
+
+            }
+
+        }
+
     }
+
 }
+
