@@ -42,6 +42,12 @@ public class DataBase {
         utentiInseriti.put(utente.getEmail(), utente);
 
     }
+    public void addHost(Host host){
+
+        hostInseriti.put(host.getEmail(), host);
+
+    }
+
 
     public Map<String, Set<Abitazione>> getCaseInserite() {
         return caseInserite;

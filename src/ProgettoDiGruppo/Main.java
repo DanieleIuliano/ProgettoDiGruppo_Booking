@@ -2,6 +2,7 @@ package ProgettoDiGruppo;
 
 import ProgettoDiGruppo.Classi.Abitazione.Durata;
 import ProgettoDiGruppo.Classi.Gestione.Gestione;
+import ProgettoDiGruppo.Classi.Utente.Host;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
 import java.time.LocalDate;
@@ -15,67 +16,127 @@ public class Main {
         Gestione gestione = new Gestione();
         Scanner scanner = new Scanner(System.in);
         String scelta;
+        String tipoUtente;
         Utente utente = null;
+        Host host = null;
 
-        System.out.println("Benvenuto in Booking\nCosa vuoi fare: ");
+        System.out.print("Benvenuto in Booking\nChe ruolo hai?\n|Host|\n|Utente|\nScelta: ");
+        tipoUtente = scanner.next();
 
-        while (true){
+        if (tipoUtente.equalsIgnoreCase("Utente")) {
+            while (true) {
 
-            if(utente == null) {
+                if (utente == null) {
 
-                System.out.println("|Registrazione|\n|Accesso|\n|Exit|");
-                System.out.print("Scelta: ");
-                scelta = scanner.next();
+                    System.out.println("|Registrazione|\n|Accesso|\n|Exit|");
+                    System.out.print("Scelta: ");
+                    scelta = scanner.next();
 
-                if(scelta.equalsIgnoreCase("Registrazione")){
+                    if (scelta.equalsIgnoreCase("Registrazione")) {
 
-                    gestione.registrazione();
+                        gestione.registrazione();
+                        continue;
+
+                    }
+
+                    if (scelta.equalsIgnoreCase("Accesso")) {
+
+                        utente = gestione.accesso();
+
+                        if (utente == null) {
+
+                            System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
+                            continue;
+
+                        } else {
+
+                            System.out.println("Accesso effettuato");
+                            continue;
+
+                        }
+
+                    }
+
+                } else {
+
+                    System.out.println("Cosa vuoi fare: \n|Prenotazione|\n|Exit|");
+                    System.out.print("Scelta: ");
+                    scelta = scanner.next();
+
+                }
+
+
+                if (scelta.equalsIgnoreCase("Exit")) {
+
+                    System.out.println("ARRIVEDERCI!!");
+                    break;
+
+                } else {
+
+                    System.out.println("Scelta non valida!");
                     continue;
 
                 }
 
-                if(scelta.equalsIgnoreCase("Accesso")){
+            }
 
-                    utente = gestione.accesso();
+        }
 
-                    if(utente == null){
+        else if(tipoUtente.equalsIgnoreCase("Host")){
 
-                        System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
+            while (true) {
+
+                if (host == null) {
+
+                    System.out.println("|Registrazione|\n|Accesso|\n|Exit|");
+                    System.out.print("Scelta: ");
+                    scelta = scanner.next();
+
+                    if (scelta.equalsIgnoreCase("Registrazione")) {
+
+                        gestione.registrazione();
                         continue;
 
                     }
 
-                    else {
+                    if (scelta.equalsIgnoreCase("Accesso")) {
 
-                        System.out.println("Accesso effettuato");
-                        continue;
+                        host = gestione.accessoHost();
+
+                        if (utente == null) {
+
+                            System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
+                            continue;
+
+                        } else {
+
+                            System.out.println("Accesso effettuato");
+                            continue;
+
+                        }
 
                     }
+
+                } else {
+
+                    System.out.println("Cosa vuoi fare: \n|Prenotazione|\n|Exit|");
+                    System.out.print("Scelta: ");
+                    scelta = scanner.next();
 
                 }
 
-            }
 
-            else {
+                if (scelta.equalsIgnoreCase("Exit")) {
 
-                System.out.println("Cosa vuoi fare: \n|Prenotazione|\n|Exit|");
-                System.out.print("Scelta: ");
-                scelta = scanner.next();
+                    System.out.println("ARRIVEDERCI!!");
+                    break;
 
-            }
+                } else {
 
+                    System.out.println("Scelta non valida!");
+                    continue;
 
-            if(scelta.equalsIgnoreCase("Exit")){
-
-                System.out.println("ARRIVEDERCI!!");
-                break;
-
-            }
-
-            else{
-
-                System.out.println("Scelta non valida!");
-                continue;
+                }
 
             }
 
@@ -90,6 +151,11 @@ public class Main {
         System.out.println(calendario1.getDates().toString());
         calendario1.rimuoviDatePrenotate(data3,data4);
         System.out.println(calendario1.getDates().toString());
+
+
+        else
+
+            System.out.println("Scelta non disponibile!");
 
     }
 
