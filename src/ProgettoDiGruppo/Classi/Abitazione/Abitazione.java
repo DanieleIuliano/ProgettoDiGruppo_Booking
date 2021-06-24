@@ -1,5 +1,6 @@
 package ProgettoDiGruppo.Classi.Abitazione;
 
+
 import ProgettoDiGruppo.Classi.Utente.FeedBack;
 
 import java.time.LocalDate;
@@ -96,4 +97,9 @@ public class Abitazione {
     public void setPiano(int piano) {
         this.piano = piano;
     }
+
+    public void stampaGiorniDisponibili(){
+
+    }
+
 }

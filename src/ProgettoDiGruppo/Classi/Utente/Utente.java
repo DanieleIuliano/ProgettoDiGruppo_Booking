@@ -14,6 +14,8 @@ public class Utente {
     private List<FeedBack> feedBacks = new LinkedList<>();
     private List<Prenotazione> prenotazioni = new LinkedList<>();
 
+    /******* Costruttore *******/
+
     public Utente(String nome, String cognome, String email, String indirizzo, String password) {
 
         this.nome = nome;
@@ -65,5 +67,16 @@ public class Utente {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /******* toString *******/
+    @Override
+    public String toString() {
+        return "Utente{" +
+                "nome='" + nome + '\'' +
+                ", cognome='" + cognome + '\'' +
+                ", email='" + email + '\'' +
+                ", feedBacks=" + feedBacks +
+                '}';
     }
 }
