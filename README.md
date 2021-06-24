@@ -1,4 +1,4 @@
-#Esercizio di Gruppo
+# Esercizio di Gruppo
 
 <img src=".idea/Hotel.jpg"> 
 
