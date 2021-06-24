@@ -1,4 +1,5 @@
 package ProgettoDiGruppo.Classi.Gestione;
+
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 import ProgettoDiGruppo.Classi.Utente.Host;
 
@@ -6,7 +7,7 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+
 
 public class AzioniHost {
 
@@ -30,12 +31,12 @@ public class AzioniHost {
         double prezzo;
         System.out.println("Comune abitazione: ");
 
-        while (true){
+        while (true) {
 
             System.out.print("Nome: ");
-            nome= scanner.nextLine();
+            nome = scanner.nextLine();
 
-            if(nome.length() < 3)
+            if (nome.length() < 3)
 
                 break;
 
@@ -300,12 +301,12 @@ public class AzioniHost {
 
         dataFine = LocalDate.of(anno, mese, giorno);
 
-        while (true){
+        while (true) {
 
             System.out.println("Prezzo settimanale: ");
             prezzo = scanner.nextDouble();
 
-            if(prezzo > 0)
+            if (prezzo > 0)
 
                 break;
 
@@ -313,10 +314,9 @@ public class AzioniHost {
 
         }
 
-        Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano );
+        Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano);
         dataBase.addCasa(host, abitazione);
     }
-
 
 
 }

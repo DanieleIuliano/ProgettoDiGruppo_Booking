@@ -4,6 +4,7 @@ import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 import ProgettoDiGruppo.Classi.Abitazione.Durata;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Prenotazione {
@@ -17,10 +18,24 @@ public class Prenotazione {
 
         id = UUID.randomUUID().toString();
         abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
+        abitazione.setNumDiVoltePrenotata();
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
         this.numeroPostiDaPrenotare = numeroPostiDaPrenotare;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prenotazione that = (Prenotazione) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public int getNumeroPostiDaPrenotare() {

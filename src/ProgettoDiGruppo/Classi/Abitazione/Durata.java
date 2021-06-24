@@ -53,7 +53,6 @@ public class Durata {
     }
 
 
-
     public void riempiListaDate() {
         for (LocalDate d = dataInizio; !d.isAfter(dataFine); d = d.plusDays(1)) {
             dates.add(d);
@@ -62,13 +61,13 @@ public class Durata {
 
     public void rimuoviDatePrenotate(LocalDate dataInizioPren, LocalDate dataFinePren) {
         List<LocalDate> datePrenotate = new ArrayList<>();
-            for (LocalDate d = dataInizioPren; !d.isAfter(dataFinePren); d = d.plusDays(1)) {
-                datePrenotate.add(d);
-            }
-            if(dates.containsAll(datePrenotate)){
-                dates.removeAll(datePrenotate);
-                System.out.println("Hai rimosso le date");
-            }else System.out.println("le date scelte non sono contenute");
+        for (LocalDate d = dataInizioPren; !d.isAfter(dataFinePren); d = d.plusDays(1)) {
+            datePrenotate.add(d);
+        }
+        if (dates.containsAll(datePrenotate)) {
+            dates.removeAll(datePrenotate);
+            System.out.println("Hai rimosso le date");
+        } else System.out.println("le date scelte non sono contenute");
 
 
     }
