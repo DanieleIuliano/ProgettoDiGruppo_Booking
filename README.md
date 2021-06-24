@@ -30,3 +30,6 @@ Period.between(aDate, sixtyDaysBehind);
 `
 
 Nota: gestite tutto con le collection, nessun database (per ora!)
+
+# Schema del progetto
+<img src="Schema.png"> 
