@@ -6,6 +6,7 @@ import ProgettoDiGruppo.Classi.Utente.FeedBack;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Abitazione {
@@ -18,6 +19,7 @@ public class Abitazione {
     private int numeroLocali;
     private int numeroPostiLetto;
     private int piano;
+    private int numDiVoltePrenotata = 0;
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
 
     public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
@@ -36,7 +38,7 @@ public class Abitazione {
         return "Abitazione{" +
                 "prezzo=" + prezzo +
                 ", id='" + id + '\'' +
-                ", durata='"+ getDurata().toString() +
+                ", durata='" + getDurata().toString() +
                 ", nome='" + nome + '\'' +
                 ", indirizzo='" + indirizzo + '\'' +
                 ", numeroLocali=" + numeroLocali +
@@ -44,6 +46,27 @@ public class Abitazione {
                 ", piano=" + piano +
                 ", feedBacksSullAbitazione=" + feedBacksSullAbitazione +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Abitazione that = (Abitazione) o;
+        return numeroLocali == that.numeroLocali && numeroPostiLetto == that.numeroPostiLetto && piano == that.piano && Objects.equals(indirizzo, that.indirizzo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(indirizzo, numeroLocali, numeroPostiLetto, piano);
+    }
+
+    public int getNumDiVoltePrenotata() {
+        return numDiVoltePrenotata;
+    }
+
+    public void setNumDiVoltePrenotata() {
+        numDiVoltePrenotata = numDiVoltePrenotata + 1;
     }
 
     public double getPrezzo() {
@@ -106,8 +129,8 @@ public class Abitazione {
         this.piano = piano;
     }
 
-    public void stampaGiorniDisponibili(){
-
+    public void stampaGiorniDisponibili() {
+        System.out.println(getDurata().toString());
     }
 
 }

@@ -18,7 +18,7 @@ public class DataBase {
 
     private static DataBase instance = null;
 
-    private DataBase(){
+    private DataBase() {
 
         caseInserite = new HashMap<>(); // STRING == CODICE HOST
         utentiInseriti = new HashMap<>(); //STRING == EMAIL UTENTE
@@ -27,9 +27,9 @@ public class DataBase {
 
     }
 
-    public static DataBase getInstance(){
+    public static DataBase getInstance() {
 
-        if(instance == null){
+        if (instance == null) {
 
             instance = new DataBase();
 
@@ -40,18 +40,19 @@ public class DataBase {
     }
 
 
-    public void addUtente(Utente utente){
+    public void addUtente(Utente utente) {
 
         utentiInseriti.put(utente.getEmail(), utente);
 
     }
-    public void addHost(Host host){
+
+    public void addHost(Host host) {
 
         hostInseriti.put(host.getEmail(), host);
 
     }
 
-    public void addCasa(Host host, Abitazione abitazione){
+    public void addCasa(Host host, Abitazione abitazione) {
 
         caseInserite.put(host.getEmail(), Collections.singleton(abitazione));
         mediaPostiLetto += abitazione.getNumeroPostiLetto();
