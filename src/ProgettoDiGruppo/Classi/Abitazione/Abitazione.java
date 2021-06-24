@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class Abitazione {
 
-    private int prezzo;
+    private double prezzo;
     private Durata durata;
     private String id;
     private String nome;
@@ -20,7 +20,7 @@ public class Abitazione {
     private int piano;
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
 
-    public Abitazione(int prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
+    public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
         this.prezzo = prezzo;
         this.durata = new Durata(dataInizio, dataFine);
         id = UUID.randomUUID().toString();
@@ -46,7 +46,7 @@ public class Abitazione {
                 '}';
     }
 
-    public int getPrezzo() {
+    public double getPrezzo() {
         return prezzo;
     }
 
