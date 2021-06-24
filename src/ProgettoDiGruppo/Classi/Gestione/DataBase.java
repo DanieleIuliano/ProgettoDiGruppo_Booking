@@ -1,8 +1,8 @@
 package ProgettoDiGruppo.Classi.Gestione;
 
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
-import Host;
-import Prenotazione;
+import ProgettoDiGruppo.Classi.Utente.Host;
+import ProgettoDiGruppo.Classi.Utente.Prenotazione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
 import java.util.*;
