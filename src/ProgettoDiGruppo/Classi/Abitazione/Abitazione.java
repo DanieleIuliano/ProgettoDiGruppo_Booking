@@ -1,6 +1,6 @@
 package ProgettoDiGruppo.Classi.Abitazione;
 
-import FeedBack;
+import ProgettoDiGruppo.Classi.Utente.FeedBack;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
