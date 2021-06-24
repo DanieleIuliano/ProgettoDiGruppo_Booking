@@ -1,5 +1,5 @@
 #Esercizio di Gruppo
-<img src="Hotel.png">
+<img src="Hotel.jpg"> 
 Un facoltoso turista americano ci ha chiesto di creare una piattaforma ispirata ad un famoso sito per affittare
 case vacanza. Tutti possono registrarsi alla piattaforma e, se approvati come host, caricare una o più abitazioni
 e specificare un prezzo, un periodo (data di inizio e data di fine) durante il quale l'abitazione è
