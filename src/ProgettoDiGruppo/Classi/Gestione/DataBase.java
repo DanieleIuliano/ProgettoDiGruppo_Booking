@@ -9,10 +9,11 @@ import java.util.*;
 
 public class DataBase {
 
-    Map<String, Set<Abitazione>> caseInserite; // STRING == CODICE HOST
-    Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
-    Map<String, Host> hostInseriti;
-    Map<String, Set<Prenotazione>> prenotazioniEffettuate;
+    private Map<String, Set<Abitazione>> caseInserite; // STRING == CODICE HOST
+    private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
+    private Map<String, Host> hostInseriti;
+    private Map<String, Set<Prenotazione>> prenotazioniEffettuate;
+
     private static DataBase instance = null;
 
     private DataBase(){
@@ -45,6 +46,12 @@ public class DataBase {
     public void addHost(Host host){
 
         hostInseriti.put(host.getEmail(), host);
+
+    }
+
+    public void addCasa(Host host, Abitazione abitazione){
+
+        caseInserite.put(host.getEmail(), Collections.singleton(abitazione));
 
     }
 

@@ -1,5 +1,6 @@
 package ProgettoDiGruppo.Classi.Gestione;
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
+import ProgettoDiGruppo.Classi.Utente.Host;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ public class AzioniHost {
     private DataBase dataBase = DataBase.getInstance();
     private Scanner scanner = new Scanner(System.in);
 
-    public void inserisciAbitazione() {
+    public void inserisciAbitazione(Host host) {
 
         String line;
         String comune;
@@ -150,7 +151,7 @@ public class AzioniHost {
             System.out.print("Anno inizio prenotazione: ");
             anno = scanner.nextInt();
 
-            if (anno >= 1950 && anno < 2005) {
+            if (anno >= LocalDate.now().getYear()) {
 
                 break;
 
@@ -182,7 +183,7 @@ public class AzioniHost {
 
             if (mese == 2) {
 
-                if (mese <= 28 && mese > 0)
+                if (giorno <= 28 && giorno > 0)
 
                     break;
 
@@ -196,7 +197,7 @@ public class AzioniHost {
 
             if (mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) {
 
-                if (mese <= 31 && mese > 0)
+                if (giorno <= 31 && giorno > 0)
 
                     break;
 
@@ -208,7 +209,7 @@ public class AzioniHost {
 
             } else {
 
-                if (mese <= 30 && mese > 0)
+                if (giorno <= 30 && giorno > 0)
 
                     break;
 
@@ -227,7 +228,7 @@ public class AzioniHost {
             System.out.print("Anno fine prenotazione: ");
             anno = scanner.nextInt();
 
-            if (anno >= 1950 && anno < 2005) {
+            if (anno >= LocalDate.now().getYear()) {
 
                 break;
 
@@ -259,7 +260,7 @@ public class AzioniHost {
 
             if (mese == 2) {
 
-                if (mese <= 28 && mese > 0)
+                if (giorno <= 28 && giorno > 0)
 
                     break;
 
@@ -273,7 +274,7 @@ public class AzioniHost {
 
             if (mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) {
 
-                if (mese <= 31 && mese > 0)
+                if (giorno <= 31 && giorno > 0)
 
                     break;
 
@@ -285,7 +286,7 @@ public class AzioniHost {
 
             } else {
 
-                if (mese <= 30 && mese > 0)
+                if (giorno <= 30 && giorno > 0)
 
                     break;
 
@@ -313,7 +314,9 @@ public class AzioniHost {
         }
 
         Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano );
-
+        dataBase.addCasa(host, abitazione);
     }
+
+
 
 }
