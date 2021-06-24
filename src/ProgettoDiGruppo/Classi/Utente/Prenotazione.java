@@ -4,6 +4,7 @@ import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 import ProgettoDiGruppo.Classi.Abitazione.Durata;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Prenotazione {
 
@@ -13,9 +14,9 @@ public class Prenotazione {
     private int numeroPostiDaPrenotare;
     private Abitazione abitazione;
 
-    public Prenotazione(String id, LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione, int numeroPostiDaPrenotare) {
+    public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione, int numeroPostiDaPrenotare) {
 
-        this.id = id;
+        id = UUID.randomUUID().toString();
         this.durata = new Durata(dataInizio, dataFine);
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
@@ -43,10 +44,6 @@ public class Prenotazione {
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Durata getDurata() {
