@@ -14,6 +14,8 @@ public class Prenotazione {
     private int numeroPostiDaPrenotare;
     private Abitazione abitazione;
 
+    /******* Costruttore *******/
+
     public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione, int numeroPostiDaPrenotare) {
 
         id = UUID.randomUUID().toString();
@@ -22,22 +24,11 @@ public class Prenotazione {
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
         this.numeroPostiDaPrenotare = numeroPostiDaPrenotare;
-
+        abitazione.setNumeroPostiLetto(numeroPostiDaPrenotare);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Prenotazione that = (Prenotazione) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
+    /******* Getter e Setter *******/
+    //CONTROLLI, TO STRING /DATA INIZIO E FINE
     public int getNumeroPostiDaPrenotare() {
         return numeroPostiDaPrenotare;
     }
@@ -54,7 +45,6 @@ public class Prenotazione {
         this.abitazione = abitazione;
     }
 
-    //CONTROLLI, TO STRING /DATA INIZIO E FINE
 
     public String getId() {
         return id;
@@ -70,4 +60,17 @@ public class Prenotazione {
     }
 
 
+    /******* Equals e Hashcode *******/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Prenotazione that = (Prenotazione) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

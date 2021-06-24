@@ -13,8 +13,6 @@ public class Host extends Utente {
     private boolean superHost = false;
     private Set<Abitazione> abitazioni = new HashSet<>();
 
-    /******* Costruttore *******/
-
     public Host(String nome, String cognome, String email, String indirizzo,String password) {
 
         super(nome, cognome, email, indirizzo,password);
@@ -22,9 +20,7 @@ public class Host extends Utente {
 
     }
 
-    
-    /******* Getter e Setter *******/
-
+    // Varie cose
     public String getCodiceHost() {
         return codiceHost;
     }
