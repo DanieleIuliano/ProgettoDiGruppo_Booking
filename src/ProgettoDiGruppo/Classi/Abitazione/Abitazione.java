@@ -31,9 +31,20 @@ public class Abitazione {
         this.piano = piano;
     }
 
-    //Controlli, AGGIUNTA ID
-    //DATA INIZIO E FINE
-    //TO string
+    @Override
+    public String toString() {
+        return "Abitazione{" +
+                "prezzo=" + prezzo +
+                ", id='" + id + '\'' +
+                ", durata='"+ getDurata().toString() +
+                ", nome='" + nome + '\'' +
+                ", indirizzo='" + indirizzo + '\'' +
+                ", numeroLocali=" + numeroLocali +
+                ", numeroPostiLetto=" + numeroPostiLetto +
+                ", piano=" + piano +
+                ", feedBacksSullAbitazione=" + feedBacksSullAbitazione +
+                '}';
+    }
 
     public int getPrezzo() {
         return prezzo;

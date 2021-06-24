@@ -20,7 +20,15 @@ public class Durata {
 
         this.dataInizio = dataInizio;
         this.dataFine = dataFine;
+        riempiListaDate();
 
+    }
+
+    @Override
+    public String toString() {
+        return "Durata{" +
+                " dates=" + dates +
+                '}';
     }
 
     /***** Getter e Setter ***/

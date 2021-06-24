@@ -1,8 +1,10 @@
 package ProgettoDiGruppo;
 
+import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 import ProgettoDiGruppo.Classi.Abitazione.Durata;
 import ProgettoDiGruppo.Classi.Gestione.Gestione;
 import ProgettoDiGruppo.Classi.Utente.Host;
+import ProgettoDiGruppo.Classi.Utente.Prenotazione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
 import java.time.LocalDate;
@@ -149,13 +151,14 @@ public class Main {
         Durata calendario1 = new Durata(data1,data2);
         calendario1.riempiListaDate();
         System.out.println(calendario1.getDates().toString());
-        calendario1.rimuoviDatePrenotate(data3,data4);
-        System.out.println(calendario1.getDates().toString());
+
+        Abitazione ab1 = new Abitazione(20,data1,data2,"casaFusco","viale",2,3,3);
+        System.out.println(ab1);
+        Prenotazione p1 = new Prenotazione(data3,data4,"coldfierz@gmail",ab1,1);
+        ab1.getDurata().rimuoviDatePrenotate(data3,data4);
+        System.out.println(ab1);
 
 
-        else
-
-            System.out.println("Scelta non disponibile!");
 
     }
 

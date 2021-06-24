@@ -9,7 +9,6 @@ import java.util.UUID;
 public class Prenotazione {
 
     private String id;
-    private Durata durata;
     private String emailUtente;
     private int numeroPostiDaPrenotare;
     private Abitazione abitazione;
@@ -17,7 +16,7 @@ public class Prenotazione {
     public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione, int numeroPostiDaPrenotare) {
 
         id = UUID.randomUUID().toString();
-        this.durata = new Durata(dataInizio, dataFine);
+        abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
         this.numeroPostiDaPrenotare = numeroPostiDaPrenotare;
@@ -46,13 +45,6 @@ public class Prenotazione {
         return id;
     }
 
-    public Durata getDurata() {
-        return durata;
-    }
-
-    public void setDurata(Durata durata) {
-        this.durata = durata;
-    }
 
     public String getEmailUtente() {
         return emailUtente;
