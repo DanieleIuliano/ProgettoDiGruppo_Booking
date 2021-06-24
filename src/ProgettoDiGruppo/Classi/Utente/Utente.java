@@ -14,6 +14,8 @@ public class Utente {
     private List<FeedBack> feedBacks = new LinkedList<>();
     private List<Prenotazione> prenotazioni = new LinkedList<>();
 
+    /******* Costruttore *******/
+
     public Utente(String nome, String cognome, String email, String indirizzo, String password) {
 
         this.nome = nome;
