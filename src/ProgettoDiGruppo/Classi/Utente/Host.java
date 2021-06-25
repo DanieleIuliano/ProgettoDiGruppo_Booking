@@ -37,6 +37,16 @@ public class Host extends Utente {
         this.numeroPrenotazioni = numeroPrenotazioni;
     }
 
+    public void addNumeroPrenotazioni() {
+
+        numeroPrenotazioni++;
+
+        if(numeroPrenotazioni == 100)
+
+            superHost = true;
+
+    }
+
     public boolean isSuperHost() {
         return superHost;
     }
@@ -44,4 +54,6 @@ public class Host extends Utente {
     public void setSuperHost(boolean superHost) {
         this.superHost = superHost;
     }
+
+
 }

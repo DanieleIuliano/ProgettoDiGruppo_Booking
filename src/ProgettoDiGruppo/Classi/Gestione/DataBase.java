@@ -9,11 +9,10 @@ import java.util.*;
 
 public class DataBase {
 
-    private Map<String, Set<Abitazione>> caseInserite; // STRING == CODICE HOST
+    private Map<String, Set<Abitazione>> caseInseriteDallHost; // STRING == CODICE HOST
     private Map<String, Set<Abitazione>> casePerComune; //STRING, serve per facilitare la ricerca in AzioniUtente nel metodo ritronaStanzeDalleSpecifiche
     private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
     private Map<String, Host> hostInseriti;
-    private Map<String, Set<Prenotazione>> prenotazioniEffettuate;
     private int mediaPostiLetto;
     private int numeroAbitazioniInserite = 0;
 
@@ -21,10 +20,9 @@ public class DataBase {
 
     private DataBase() {
 
-        caseInserite = new HashMap<>(); // STRING == CODICE HOST
+        caseInseriteDallHost = new HashMap<>(); // STRING == CODICE HOST
         utentiInseriti = new HashMap<>(); //STRING == EMAIL UTENTE
         hostInseriti = new HashMap<>();
-        prenotazioniEffettuate = new HashMap<>();
         casePerComune = new HashMap<>();
 
     }
@@ -56,7 +54,10 @@ public class DataBase {
 
     public void addCasa(Host host, Abitazione abitazione) {
 
-        caseInserite.put(host.getEmail(), Collections.singleton(abitazione));
+        Set<Abitazione> abitazioni = caseInseriteDallHost.getOrDefault(host.getEmail(), new HashSet<>());
+        abitazioni.add(abitazione);
+        caseInseriteDallHost.put(host.getEmail(), abitazioni);
+
         mediaPostiLetto += abitazione.getNumeroPostiLetto();
         numeroAbitazioniInserite++;
 
@@ -64,7 +65,9 @@ public class DataBase {
 
     public void addCasaPerComune(String comune, Abitazione abitazione) {
 
-        casePerComune.put(comune, Collections.singleton(abitazione));
+        Set<Abitazione> abitazioni = casePerComune.getOrDefault(comune, new HashSet<>());
+        abitazioni.add(abitazione);
+        casePerComune.put(comune, abitazioni);
 
     }
 
@@ -75,8 +78,8 @@ public class DataBase {
     }
 
 
-    public Map<String, Set<Abitazione>> getCaseInserite() {
-        return caseInserite;
+    public Map<String, Set<Abitazione>> getCaseInseriteDallHost() {
+        return caseInseriteDallHost;
     }
 
     public Map<String, Utente> getUtentiInseriti() {
@@ -87,11 +90,9 @@ public class DataBase {
         return hostInseriti;
     }
 
-    public Map<String, Set<Prenotazione>> getPrenotazioniEffettuate() {
-        return prenotazioniEffettuate;
-    }
-
     public Map<String, Set<Abitazione>> getCasePerComune() {
+
         return casePerComune;
+
     }
 }

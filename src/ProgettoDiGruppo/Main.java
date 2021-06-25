@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-/*
+
         Gestione gestione = new Gestione();
         Scanner scanner = new Scanner(System.in);
         String scelta;
@@ -143,20 +143,6 @@ public class Main {
             }
 
         }
-*/
-        /*
-        LocalDate data1 = LocalDate.of(2021, 6, 24);
-        LocalDate data2 = LocalDate.of(2021, 8, 24);
-        LocalDate data3 = LocalDate.of(2021, 7, 24);
-        LocalDate data4 = LocalDate.of(2021, 8, 24);
-        Durata calendario1 = new Durata(data1,data2);
-        Abitazione ab1 = new Abitazione(20,data1,data2,"casaFusco","viale",2,3,3);
-        System.out.println(ab1);
-        Prenotazione p1 = new Prenotazione(data3,data4,"coldfierz@gmail",ab1,1);
-        ab1.getDurata().rimuoviDatePrenotate(data3,data4);
-        System.out.println(ab1);
-        System.out.println(ab1.getNumDiVoltePrenotata());
-*/
 
     }
 

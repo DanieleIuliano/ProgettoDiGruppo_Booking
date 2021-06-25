@@ -102,7 +102,8 @@ public class AzioniUtente {
                 if(scelta.equalsIgnoreCase("Si")) {
 
                     Prenotazione prenotazione = new Prenotazione(inizioPrenotazione,finePrenotazione,utente.getEmail(),abitazioniDisponibili.get(idCasa));
-
+                    utente.getPrenotazioni().add(prenotazione);
+                    dataBase.getHostInseriti().get(abitazioniDisponibili.get(idCasa).getEmailHost()).addNumeroPrenotazioni();
                     System.out.println("Prenotazione effettuata!");
 
                 }
@@ -114,9 +115,6 @@ public class AzioniUtente {
             }
 
         }
-
-
-
 
     }
 
@@ -135,9 +133,7 @@ public class AzioniUtente {
 
                 }
             }
-
         }
-
     }
 
 
@@ -240,6 +236,13 @@ public class AzioniUtente {
         }
 
         return LocalDate.of(anno, mese, giorno);
+
+    }
+
+
+    public Prenotazione ultimaPrenotazioneUtente(Utente utente){
+
+        return utente.getPrenotazioni().peek();
 
     }
 

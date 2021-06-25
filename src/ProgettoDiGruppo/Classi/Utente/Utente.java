@@ -2,6 +2,7 @@ package ProgettoDiGruppo.Classi.Utente;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.regex.Pattern;
 
 public class Utente {
@@ -12,7 +13,7 @@ public class Utente {
     private String indirizzo;
     private String password;
     private List<FeedBack> feedBacks = new LinkedList<>();
-    private List<Prenotazione> prenotazioni = new LinkedList<>();
+    private Queue<Prenotazione> prenotazioni = new LinkedList<>();
 
     /******* Costruttore *******/
 
@@ -68,6 +69,11 @@ public class Utente {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Queue<Prenotazione> getPrenotazioni() {
+        return prenotazioni;
+    }
+
 
     /******* toString *******/
     @Override

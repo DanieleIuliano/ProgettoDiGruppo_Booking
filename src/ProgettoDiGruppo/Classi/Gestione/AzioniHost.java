@@ -5,8 +5,10 @@ import ProgettoDiGruppo.Classi.Utente.Host;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
 
 
 public class AzioniHost {
@@ -168,7 +170,7 @@ public class AzioniHost {
 
         }
 
-        Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano);
+        Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano, host.getEmail());
         dataBase.addCasa(host, abitazione);
         dataBase.addCasaPerComune(comune, abitazione);
 
@@ -283,6 +285,35 @@ public class AzioniHost {
         return LocalDate.of(anno, mese, giorno);
 
     }
+
+    /**
+     *
+     * @param emailHost .
+     * @return le case relative all'utente.
+     */
+
+    public Set<Abitazione> abitazioniPerHost(String emailHost){
+
+        return dataBase.getCaseInseriteDallHost().get(emailHost);
+
+    }
+
+    public Set<Host> ritornaSuperHost(){
+
+        Set<Host> superHost = new HashSet<>();
+
+        for(Host host : dataBase.getHostInseriti().values()){
+
+            if(host.isSuperHost())
+
+                superHost.add(host);
+
+        }
+
+        return superHost;
+
+    }
+
 
 
 }

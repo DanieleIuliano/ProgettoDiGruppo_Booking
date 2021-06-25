@@ -17,11 +17,12 @@ public class Abitazione extends TreeSet<Abitazione> {
     private int numeroPostiLetto;
     private int piano;
     private int numDiVoltePrenotata = 0;
+    private String emailHost;
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
 
     /******* Costruttore *******/
 
-    public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano) {
+    public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano,  String emailHost) {
         this.prezzo = prezzo;
         this.durata = new Durata(dataInizio, dataFine);
         id = UUID.randomUUID().toString();
@@ -30,9 +31,16 @@ public class Abitazione extends TreeSet<Abitazione> {
         this.numeroLocali = numeroLocali;
         this.numeroPostiLetto = numeroPostiLetto;
         this.piano = piano;
+        this.emailHost = emailHost;
     }
 
+
     /******* Getter e Setter *******/
+
+    public String getEmailHost() {
+        return emailHost;
+    }
+
     public double getPrezzo() {
         return prezzo;
     }
