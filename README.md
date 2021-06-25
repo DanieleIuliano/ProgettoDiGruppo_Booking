@@ -34,5 +34,5 @@ Nota: gestite tutto con le collection, nessun database (per ora!)
 # Schema del progetto
 <img src="Schema.png"> 
 
-#Schema del progetto finale 
+# Schema del progetto finale 
 <img src="Class_Diagram_Booking.svg"> 
