@@ -121,7 +121,8 @@ public class Abitazione extends TreeSet<Abitazione> {
         return "Abitazione{" +
                 "prezzo giornaliero=" + prezzo +
                 ", id='" + id + '\'' +
-                ", durata='" + getDurata().toString() +
+                ", data Inizio='" + getDurata().getDataInizio() +
+                ", data Fine='"+getDurata().getDataFine() +
                 ", nome='" + nome + '\'' +
                 ", indirizzo='" + indirizzo + '\'' +
                 ", numeroLocali=" + numeroLocali +
@@ -167,5 +168,10 @@ public class Abitazione extends TreeSet<Abitazione> {
         System.out.println(getDurata().toString());
     }
 
+    public void addFeedback(String titolo, String descrizione, int punteggio){
+
+       // feedBacksSullAbitazione.add(new FeedBack(titolo, descrizione, punteggio, this));
+
+    }
 
 }

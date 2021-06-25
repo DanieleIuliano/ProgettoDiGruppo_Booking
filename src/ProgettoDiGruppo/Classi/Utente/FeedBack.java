@@ -18,6 +18,7 @@ public class FeedBack {
         setTesto(testo);
         setPunteggio(punteggio);
         this.abitazione = abitazione;
+        abitazione.addFeedback(titolo, testo, punteggio);
     }
 
     //To string

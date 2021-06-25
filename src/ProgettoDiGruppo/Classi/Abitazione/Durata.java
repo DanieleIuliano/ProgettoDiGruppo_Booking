@@ -72,7 +72,7 @@ public class Durata {
 
         }
 
-        if(dates.contains(giorniDaPrenotare))
+        if(dates.containsAll(giorniDaPrenotare))
 
             return true;
 

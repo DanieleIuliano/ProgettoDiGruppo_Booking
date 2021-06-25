@@ -28,14 +28,13 @@ public class AzioniHost {
         LocalDate dataFine;
         String nome;
         double prezzo;
-        System.out.println("Comune abitazione: ");
 
         while (true) {
 
             System.out.print("Nome: ");
             nome = scanner.nextLine();
 
-            if (nome.length() < 3)
+            if (nome.length() > 3)
 
                 break;
 
@@ -163,7 +162,7 @@ public class AzioniHost {
 
         while (true) {
 
-            System.out.println("Prezzo settimanale: ");
+            System.out.print("Prezzo settimanale: ");
             prezzo = scanner.nextDouble();
 
             if (prezzo > 0)
@@ -177,6 +176,7 @@ public class AzioniHost {
         Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano, host.getEmail());
         dataBase.addCasa(host, abitazione);
         dataBase.addCasaPerComune(comune, abitazione);
+
 
     }
 
@@ -215,13 +215,13 @@ public class AzioniHost {
             System.out.print("Numero mese: ");
             mese = scanner.nextInt();
 
-            if(anno == LocalDate.now().getYear()){
+            if (anno == LocalDate.now().getYear()) {
 
-                if(mese >= LocalDate.now().getMonthValue())
+                if (mese >= LocalDate.now().getMonthValue())
 
                     break;
 
-                else{
+                else {
 
                     System.out.println("Mese non valido");
                     continue;
@@ -229,16 +229,17 @@ public class AzioniHost {
                 }
 
 
+            } else {
+
+                if (mese <= 12 && mese > 0) {
+
+                    break;
+
+                }
+
+                System.out.println("Mese non valido");
+
             }
-
-            if(mese <= 12 && mese > 0) {
-
-                break;
-
-            }
-
-            System.out.println("Mese non valido");
-
         }
 
         while (true) {
@@ -246,44 +247,59 @@ public class AzioniHost {
             System.out.print("Giorno prenotazione: ");
             giorno = scanner.nextInt();
 
-            if (mese == 2) {
+            if (mese == LocalDate.now().getMonthValue()) {
 
-                if (giorno <= 28 && giorno > 0 && giorno >= LocalDate.now().getDayOfMonth() )
+                if(giorno >= LocalDate.now().getDayOfMonth()){
 
                     break;
 
-                else {
+                }
 
-                    System.out.println("Giorno non valido");
+                continue;
+
+            }
+
+            else {
+
+                if (mese == 2) {
+
+                    if (giorno <= 28 && giorno > 0)
+
+                        break;
+
+                    else {
+
+                        System.out.println("Giorno non valido");
+
+                    }
+
+                }
+
+                if (mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) {
+
+                    if (giorno <= 31 && giorno > 0)
+
+                        break;
+
+                    else {
+
+                        System.out.println("Giorno non valido");
+
+                    }
+
+                } else {
+
+                    if (giorno <= 30 && giorno > 0)
+
+                        break;
+
+                    else
+
+                        System.out.println("Giorno non valido");
 
                 }
 
             }
-
-            if (mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) {
-
-                if (giorno <= 31 && giorno > 0 &&  giorno >= LocalDate.now().getDayOfMonth())
-
-                    break;
-
-                else {
-
-                    System.out.println("Giorno non valido");
-
-                }
-
-            } else {
-
-                if (giorno <= 30 && giorno > 0 &&  giorno >= LocalDate.now().getDayOfMonth())
-
-                    break;
-
-                else
-
-                    System.out.println("Giorno non valido");
-
-            }
-
         }
 
         return LocalDate.of(anno, mese, giorno);

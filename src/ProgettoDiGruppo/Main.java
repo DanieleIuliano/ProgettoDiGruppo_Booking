@@ -1,17 +1,13 @@
 package ProgettoDiGruppo;
 
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
-import ProgettoDiGruppo.Classi.Abitazione.Durata;
 import ProgettoDiGruppo.Classi.Gestione.AzioniHost;
 import ProgettoDiGruppo.Classi.Gestione.AzioniUtente;
+import ProgettoDiGruppo.Classi.Gestione.DataBase;
 import ProgettoDiGruppo.Classi.Gestione.Gestione;
 import ProgettoDiGruppo.Classi.Utente.Host;
 import ProgettoDiGruppo.Classi.Utente.Prenotazione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
-
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Date;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -25,12 +21,16 @@ public class Main {
         String tipoUtente;
         Utente utente = null;
         Host host = null;
+        DataBase dataBase = DataBase.getInstance();
 
         while (true) {
             System.out.print("Benvenuto in Booking\nChe ruolo hai?\n|Host|\n|Utente|\n|Exit|\nScelta: ");
             tipoUtente = scanner.next();
 
             if (tipoUtente.equalsIgnoreCase("Utente")) {
+
+                Prenotazione prenotazione;
+
                 while (true) {
 
                     if (utente == null) {
@@ -53,21 +53,22 @@ public class Main {
                             if (utente == null) {
 
                                 System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
-                                continue;
-
-                            } else {
-
-                                System.out.println("Accesso effettuato");
-                                continue;
 
                             }
+                            else {
+
+                                System.out.println("Accesso effettuato");
+
+                            }
+                            continue;
 
                         }
 
-                    } else {
+                    }
+                    else {
 
                         AzioniUtente azioniUtente = new AzioniUtente();
-                        System.out.println("Cosa vuoi fare: \n|Prenotazione| Per prenotare una abitazione\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\n|Exit|");
+                        System.out.println("Cosa vuoi fare: \n|Prenotazione| Per prenotare una abitazione\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\n|Feedback|\n|Exit|");
                         System.out.print("Scelta: ");
                         scelta = scanner.next();
 
@@ -78,9 +79,9 @@ public class Main {
 
                         }
 
-                        if (scelta.equalsIgnoreCase("UtlimaPrenotazione")) {
+                        if (scelta.equalsIgnoreCase("UltimaPrenotazione")) {
 
-                            Prenotazione prenotazione = azioniUtente.ultimaPrenotazioneUtente(utente);
+                            prenotazione = azioniUtente.ultimaPrenotazioneUtente(utente);
                             if (prenotazione == null) {
 
                                 System.out.println("Devi prima effettuare una prenotazione!");
@@ -88,23 +89,27 @@ public class Main {
 
                             }
 
-                            System.out.println(prenotazione.toString());
+                            System.out.println(prenotazione);
 
                             continue;
 
+                        }
+
+                        if(scelta.equalsIgnoreCase("Feedback")) {
+
+                            azioniUtente.inserisciRecenzionePerAbitazione(utente);
+                            continue;
                         }
 
                     }
 
                     if (scelta.equalsIgnoreCase("Exit")) {
 
-                        System.out.println("ARRIVEDERCI!!");
                         break;
 
                     } else {
 
                         System.out.println("Scelta non valida!");
-                        continue;
 
                     }
 
@@ -131,24 +136,23 @@ public class Main {
 
                             host = gestione.accessoHost();
 
-                            if (utente == null) {
+                            if (host == null) {
 
                                 System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
-                                continue;
 
                             } else {
 
                                 System.out.println("Accesso effettuato");
-                                continue;
 
                             }
+                            continue;
 
                         }
 
                     } else {
 
                         AzioniHost azioniHost = new AzioniHost();
-                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Abitazione per l'host\n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto|Exit|");
+                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Lista abitazioni \n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto|Exit|");
                         System.out.print("Scelta: ");
                         scelta = scanner.next();
 
@@ -163,6 +167,13 @@ public class Main {
 
                             Set<Abitazione> abitazioniHost = azioniHost.abitazioniPerHost(host.getEmail());
 
+                            if(abitazioniHost == null){
+
+                                System.out.println("Nessuna abitazione presente");
+                                continue;
+
+                            }
+
                             for (Abitazione abitazione : abitazioniHost) {
 
                                 System.out.println(abitazione.toString());
@@ -175,6 +186,13 @@ public class Main {
                         if (scelta.equalsIgnoreCase("SuperHost")) {
 
                             Set<Host> superHost = azioniHost.ritornaSuperHost();
+
+                            if(superHost.size() <= 0){
+
+                                System.out.println("Nessun super host presente");
+                                continue;
+
+                            }
 
                             for (Host hosts : superHost) {
 
@@ -203,7 +221,6 @@ public class Main {
                     } else {
 
                         System.out.println("Scelta non valida!");
-                        continue;
 
                     }
 

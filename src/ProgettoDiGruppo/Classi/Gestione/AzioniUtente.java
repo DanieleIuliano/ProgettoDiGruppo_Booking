@@ -2,6 +2,7 @@ package ProgettoDiGruppo.Classi.Gestione;
 
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 import ProgettoDiGruppo.Classi.Abitazione.Durata;
+import ProgettoDiGruppo.Classi.Utente.FeedBack;
 import ProgettoDiGruppo.Classi.Utente.Prenotazione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
@@ -44,7 +45,7 @@ public class AzioniUtente {
 
             }
 
-            if(line == null){
+            if (line == null) {
 
                 System.out.println("Comune non disponibile");
                 return;
@@ -68,7 +69,7 @@ public class AzioniUtente {
 
         while (true) {
 
-            System.out.println("Posti letto: ");
+            System.out.print("Posti letto: ");
             numeroPostiLetto = scanner.nextInt();
 
             if (numeroPostiLetto > 0)
@@ -80,11 +81,17 @@ public class AzioniUtente {
         }
 
         ritronaStanzeDalleSpecifiche(comune, inizioPrenotazione, finePrenotazione, numeroPostiLetto);
+        if (abitazioniDisponibili.size() == 0){
+
+            System.out.println("Nessuna casa disponibile");
+            return;
+
+        }
 
         while (true) {
 
             System.out.print("Id casa da prenotare: ");
-            idCasa = scanner.nextLine();
+            idCasa = scanner.next();
             int numeroGiorniPrenotati = inizioPrenotazione.getDayOfYear() - finePrenotazione.getDayOfYear();
 
             if(numeroGiorniPrenotati < 0)
@@ -94,9 +101,9 @@ public class AzioniUtente {
             if(abitazioniDisponibili.containsKey(idCasa)){
 
                 String scelta;
-                System.out.print("Il prezzo da pagare è di: " + (abitazioniDisponibili.get(idCasa).getPrezzo() * numeroGiorniPrenotati));
+                System.out.println("Il prezzo da pagare è di: " + (abitazioniDisponibili.get(idCasa).getPrezzo() * numeroGiorniPrenotati));
                 System.out.print("Prenoti: ");
-                scelta = scanner.nextLine();
+                scelta = scanner.next();
 
                 if(scelta.equalsIgnoreCase("Si")) {
 
@@ -104,26 +111,29 @@ public class AzioniUtente {
                     utente.getPrenotazioni().add(prenotazione);
                     dataBase.getHostInseriti().get(abitazioniDisponibili.get(idCasa).getEmailHost()).addNumeroPrenotazioni();
                     System.out.println("Prenotazione effettuata!");
+                    return;
 
                 }
 
-                else
+                else {
 
                     System.out.println("Okay, sarà per la prossima");
+                    return;
+                }
 
             }
 
-            else
+            else {
 
                 System.out.println("Casa non disponibile");
-
+                return;
+            }
         }
 
     }
 
     private void ritronaStanzeDalleSpecifiche(String comune, LocalDate dataInizio, LocalDate dataFine, int postiLetto){
 
-        Durata durata = new Durata(dataInizio, dataFine);
 
         for(Abitazione abitazione : dataBase.getCasePerComune().get(comune)){
 
@@ -165,13 +175,13 @@ public class AzioniUtente {
             System.out.print("Numero mese: ");
             mese = scanner.nextInt();
 
-            if(anno == LocalDate.now().getYear()){
+            if (anno == LocalDate.now().getYear()) {
 
-                if(mese >= LocalDate.now().getMonthValue())
+                if (mese >= LocalDate.now().getMonthValue() && mese <= 12)
 
                     break;
 
-                else{
+                else {
 
                     System.out.println("Mese non valido");
                     continue;
@@ -179,16 +189,17 @@ public class AzioniUtente {
                 }
 
 
+            } else {
+
+                if (mese <= 12 && mese > 0) {
+
+                    break;
+
+                }
+
+                System.out.println("Mese non valido");
+
             }
-
-            if(mese <= 12 && mese > 0) {
-
-                break;
-
-            }
-
-            System.out.println("Mese non valido");
-
         }
 
         while (true) {
@@ -196,44 +207,59 @@ public class AzioniUtente {
             System.out.print("Giorno prenotazione: ");
             giorno = scanner.nextInt();
 
-            if (mese == 2) {
+            if (mese == LocalDate.now().getMonthValue()) {
 
-                if (giorno <= 28 && giorno > 0 && giorno >= LocalDate.now().getDayOfMonth() )
+                if(giorno >= LocalDate.now().getDayOfMonth()){
 
                     break;
 
-                else {
+                }
 
-                    System.out.println("Giorno non valido");
+                continue;
+
+            }
+
+            else {
+
+                if (mese == 2) {
+
+                    if (giorno <= 28 && giorno > 0)
+
+                        break;
+
+                    else {
+
+                        System.out.println("Giorno non valido");
+
+                    }
+
+                }
+
+                if (mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) {
+
+                    if (giorno <= 31 && giorno > 0)
+
+                        break;
+
+                    else {
+
+                        System.out.println("Giorno non valido");
+
+                    }
+
+                } else {
+
+                    if (giorno <= 30 && giorno > 0)
+
+                        break;
+
+                    else
+
+                        System.out.println("Giorno non valido");
 
                 }
 
             }
-
-            if (mese == 1 || mese == 3 || mese == 5 || mese == 7 || mese == 8 || mese == 10 || mese == 12) {
-
-                if (giorno <= 31 && giorno > 0 &&  giorno >= LocalDate.now().getDayOfMonth())
-
-                    break;
-
-                else {
-
-                    System.out.println("Giorno non valido");
-
-                }
-
-            } else {
-
-                if (giorno <= 30 && giorno > 0 &&  giorno >= LocalDate.now().getDayOfMonth())
-
-                    break;
-
-                else
-
-                    System.out.println("Giorno non valido");
-
-            }
-
         }
 
         return LocalDate.of(anno, mese, giorno);
@@ -247,6 +273,38 @@ public class AzioniUtente {
     }
 
 
+
+    public void inserisciRecenzionePerAbitazione(Utente utente){
+
+        String idAbitazione;
+        String titolo;
+        String descrizione;
+        int punteggio;
+
+        for (Prenotazione prenotazione : utente.getPrenotazioni()){
+
+            System.out.println(prenotazione);
+
+        }
+
+        System.out.print("Id abitazione: ");
+        idAbitazione = scanner.nextLine();
+
+            System.out.print("Titolo: ");
+            titolo = scanner.nextLine();
+
+
+            System.out.print("Descrizione: ");
+            descrizione = scanner.nextLine();
+
+
+            System.out.println("Punteggio: ");
+            punteggio = scanner.nextInt();
+
+            FeedBack feedBack = new FeedBack(titolo, descrizione, punteggio, dataBase.getCasePresentiNelDatabase().get(idAbitazione));
+
+
+    }
 
 }
 

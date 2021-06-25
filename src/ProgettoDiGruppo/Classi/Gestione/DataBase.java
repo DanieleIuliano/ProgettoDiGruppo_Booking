@@ -14,6 +14,7 @@ public class DataBase {
     private Map<String, Set<Abitazione>> casePerComune; //STRING, serve per facilitare la ricerca in AzioniUtente nel metodo ritronaStanzeDalleSpecifiche
     private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
     private Map<String, Host> hostInseriti;
+    private Map<String, Abitazione> casePresentiNelDatabase; //String == Id casa
 
     private int mediaPostiLetto;
     private int numeroAbitazioniInserite = 0;
@@ -26,6 +27,7 @@ public class DataBase {
         utentiInseriti = new HashMap<>(); //STRING == EMAIL UTENTE
         hostInseriti = new HashMap<>();
         casePerComune = new HashMap<>();
+        casePresentiNelDatabase = new HashMap<>();
         inserimentoDati();
 
     }
@@ -54,11 +56,16 @@ public class DataBase {
 
     }
 
+    public Map<String, Abitazione> getCasePresentiNelDatabase() {
+        return casePresentiNelDatabase;
+    }
+
     public void addCasa(Host host, Abitazione abitazione) {
 
         Set<Abitazione> abitazioni = caseInseriteDallHost.getOrDefault(host.getEmail(), new HashSet<>());
         abitazioni.add(abitazione);
         caseInseriteDallHost.put(host.getEmail(), abitazioni);
+        casePresentiNelDatabase.put(abitazione.getId(), abitazione);
 
         mediaPostiLetto += abitazione.getNumeroPostiLetto();
         numeroAbitazioniInserite++;
@@ -125,14 +132,14 @@ public class DataBase {
         hostInseriti.put(host1.getEmail(), host1);
 
 
-        Utente utente2 = new Utente("Daniele", "Iuliano","danieleIuliano@gmail.com", "Via horse 3", "Daniele");
+        Utente utente2 = new Utente("Daniele", "Iuliano","danieleIuliano@gmail.com", "Via horse 3", "Danielee");
         Host host2 = new Host(utente2);
         utentiInseriti.put(utente2.getEmail(), utente2);
         hostInseriti.put(utente2.getEmail(), host2);
 
 
         Utente utente3 = new Utente("Giovanni", "Cidu","giovanniCidu@gmail.com", "Via mariss 3", "Giovanni");
-        Host host3 = new Host(utente2);
+        Host host3 = new Host(utente3);
         utentiInseriti.put(utente3.getEmail(), utente3);
         hostInseriti.put(host3.getEmail(), host3);
 

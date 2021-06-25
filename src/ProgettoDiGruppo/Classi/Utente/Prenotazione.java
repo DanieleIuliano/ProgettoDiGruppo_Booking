@@ -26,12 +26,13 @@ public class Prenotazione {
 
         numeroGiorni = Period.between(LocalDate.now().minusDays(30), LocalDate.now()).getDays();
         pagamento = abitazione.getPrezzo() * numeroGiorni;
+        this.abitazione = abitazione;
         id = UUID.randomUUID().toString();
         abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
         abitazione.setNumDiVoltePrenotata();
         add1Mese(dataInizio, dataFine);
         this.emailUtente = emailUtente;
-        this.abitazione = abitazione;
+
 
     }
 
@@ -57,13 +58,15 @@ public class Prenotazione {
         this.emailUtente = emailUtente;
     }
 
-    /******* Equals e Hashcode *******/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Prenotazione that = (Prenotazione) o;
-        return Objects.equals(id, that.id);
+    public boolean equals(String abitazioneId) {
+
+        if(abitazioneId.equals(abitazione.getId()))
+
+            return true;
+
+        return false;
+
+
     }
 
     @Override
@@ -71,12 +74,27 @@ public class Prenotazione {
         return Objects.hash(id);
     }
 
-
     public void add1Mese(LocalDate dataInizioPren, LocalDate dataFinePren) {
+
         if (dataInizioPren.getMonth().equals(dataFinePren.getMonth())) {
-            int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
-            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn + 1);
-            return;
+
+            int numPrenMeseIn;
+
+            try {
+
+                numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
+
+            }
+
+            catch (NullPointerException e){
+
+                abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), 1);
+                numPrenMeseIn = 1;
+
+            }
+                abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn + 1);
+                return;
+
         } else {
             int numPrenMeseFin = abitazione.getMesiNumPrenotazioni().get(dataFinePren.getMonth());
             abitazione.getMesiNumPrenotazioni().put(dataFinePren.getMonth(), numPrenMeseFin + 1);
@@ -90,9 +108,16 @@ public class Prenotazione {
     public String toString() {
         return "Prenotazione{" +
                 "emailUtente='" + emailUtente + '\'' +
-                ", abitazione=" + abitazione +
+                ", Id abitazione: " + abitazione.getId()+
+                ", Nome abitazione=" + abitazione.getNome() +
+                ", Prezzo giornaliero = "+ abitazione.getPrezzo()+
+                ", via: "+abitazione.getIndirizzo() +
+                ", numeroLocali=" + abitazione.getNumeroLocali() +
+                ", numeroPostiLetto=" + abitazione.getNumeroPostiLetto() +
+                ", piano=" + abitazione.getPiano() +
                 ", pagamento=" + pagamento +
                 ", numeroGiorni=" + numeroGiorni +
                 '}';
     }
+
 }

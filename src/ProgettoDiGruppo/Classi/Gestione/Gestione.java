@@ -3,13 +3,14 @@ package ProgettoDiGruppo.Classi.Gestione;
 import ProgettoDiGruppo.Classi.Utente.Host;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Gestione {
 
-    private DataBase dataBase = DataBase.getInstance();
-    private Scanner scanner = new Scanner(System.in);
+    private final DataBase dataBase = DataBase.getInstance();
+    private final Scanner scanner = new Scanner(System.in);
 
     public void registrazione() {
 
@@ -106,7 +107,6 @@ public class Gestione {
 
         Utente utente = new Utente(nomeUtente, cognomeUtente, email, indirizzo, password);
         dataBase.addUtente(utente);
-        utente = null;
 
     }
 
@@ -117,7 +117,7 @@ public class Gestione {
 
         while (true) {
 
-            System.out.println("Email: ");
+            System.out.print("Email: ");
             Pattern patternEmail = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}");
             email = scanner.next();
 
@@ -149,29 +149,26 @@ public class Gestione {
 
             if(dataBase.getUtentiInseriti().get(email).getPassword().equalsIgnoreCase(password)) {
 
-                System.out.println("Accesso effettuato");
-                dataBase.getUtentiInseriti().get(email);
+                return dataBase.getUtentiInseriti().get(email);
 
             }
-        System.out.println("Accesso Errato");
+
         return null;
 
     }
 
-    public void richiestaHost(String email){
+    public boolean richiestaHost(String email){
 
         Utente utente = dataBase.getUtentiInseriti().get(email);
         if(utente == null){
 
-            System.out.println("DEVI PRIMA REGISTRARTI!!");
-            return;
+            return false;
 
         }
 
         Host host = new Host(utente.getNome(), utente.getCognome(), utente.getEmail(), utente.getIndirizzo(), utente.getPassword());
         dataBase.addHost(host);
-        host = null;
-
+        return true;
     }
 
     public Host accessoHost(){
@@ -181,7 +178,7 @@ public class Gestione {
 
         while (true) {
 
-            System.out.println("Email: ");
+            System.out.print("Email: ");
             Pattern patternEmail = Pattern.compile("[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}");
             email = scanner.next();
 
@@ -193,7 +190,9 @@ public class Gestione {
 
         }
 
-        richiestaHost(email);
+        if(!richiestaHost(email))
+
+            return null;
 
         while (true) {
 
@@ -211,26 +210,17 @@ public class Gestione {
 
         }
 
-        if(dataBase.getHostInseriti().containsKey(email))
+        if(dataBase.getHostInseriti().containsKey(email.toLowerCase(Locale.ROOT)))
 
             if(dataBase.getHostInseriti().get(email).getPassword().equalsIgnoreCase(password)) {
 
-                System.out.println("Accesso effettuato");
-                dataBase.getHostInseriti().get(email);
+                return dataBase.getHostInseriti().get(email);
 
             }
-        System.out.println("Accesso Errato");
+
         return null;
 
 
     }
-
-    public void abitazioniDiUnHost(Host host){
-
-        System.out.println(dataBase.getCaseInseriteDallHost().get(host.getEmail()).toString());
-
-    }
-
-
 
 }
