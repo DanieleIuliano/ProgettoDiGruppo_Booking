@@ -4,6 +4,7 @@ package ProgettoDiGruppo.Classi.Abitazione;
 import ProgettoDiGruppo.Classi.Utente.FeedBack;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 public class Abitazione extends TreeSet<Abitazione> {
@@ -19,6 +20,9 @@ public class Abitazione extends TreeSet<Abitazione> {
     private int numDiVoltePrenotata = 0;
     private String emailHost;
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
+    private Map<Month,Integer> mesiNumPrenotazioni = new HashMap<>();
+
+
 
     /******* Costruttore *******/
 
@@ -35,7 +39,16 @@ public class Abitazione extends TreeSet<Abitazione> {
     }
 
 
+
+
     /******* Getter e Setter *******/
+    public Map<Month, Integer> getMesiNumPrenotazioni() {
+        return mesiNumPrenotazioni;
+    }
+
+    public void setMesiNumPrenotazioni(Map<Month, Integer> mesiNumPrenotazioni) {
+        this.mesiNumPrenotazioni = mesiNumPrenotazioni;
+    }
 
     public String getEmailHost() {
         return emailHost;
@@ -153,5 +166,6 @@ public class Abitazione extends TreeSet<Abitazione> {
     public void stampaGiorniDisponibili() {
         System.out.println(getDurata().toString());
     }
+
 
 }

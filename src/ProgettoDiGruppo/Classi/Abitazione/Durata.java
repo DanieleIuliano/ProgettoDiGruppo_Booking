@@ -1,8 +1,10 @@
 package ProgettoDiGruppo.Classi.Abitazione;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Month;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 
 
 public class Durata {
@@ -10,6 +12,7 @@ public class Durata {
     private LocalDate dataInizio;
     private LocalDate dataFine;
     private List<LocalDate> dates = new ArrayList<>();
+    Map<Month,Integer> mesiNumPrenotazioni = new HashMap<>();
 
     public List<LocalDate> getDates() {
         return dates;
@@ -88,8 +91,10 @@ public class Durata {
             System.out.println("Hai rimosso le date");
         } else System.out.println("le date scelte non sono contenute");
 
-
     }
+
+
+
 
 
 }

@@ -1,9 +1,10 @@
 package ProgettoDiGruppo.Classi.Utente;
 
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
-import ProgettoDiGruppo.Classi.Abitazione.Durata;
+
 
 import java.time.LocalDate;
+
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ public class Prenotazione {
     private String emailUtente;
     private Abitazione abitazione;
 
+
     /******* Costruttore *******/
 
     public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione) {
@@ -20,6 +22,7 @@ public class Prenotazione {
         id = UUID.randomUUID().toString();
         abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
         abitazione.setNumDiVoltePrenotata();
+        add1Mese(dataInizio,dataFine);
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
 
@@ -63,5 +66,18 @@ public class Prenotazione {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void add1Mese(LocalDate dataInizioPren, LocalDate dataFinePren){
+        if(dataInizioPren.getMonth().equals(dataFinePren.getMonth())){
+            int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
+            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn +1);
+            return;
+        }else {
+            int numPrenMeseFin = abitazione.getMesiNumPrenotazioni().get(dataFinePren.getMonth());
+            abitazione.getMesiNumPrenotazioni().put(dataFinePren.getMonth(),numPrenMeseFin+1);
+            int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
+            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn +1);
+        }
     }
 }

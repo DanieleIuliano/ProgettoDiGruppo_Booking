@@ -2,9 +2,10 @@ package ProgettoDiGruppo.Classi.Gestione;
 
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 import ProgettoDiGruppo.Classi.Utente.Host;
-import ProgettoDiGruppo.Classi.Utente.Prenotazione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.*;
 
 public class DataBase {
@@ -13,6 +14,7 @@ public class DataBase {
     private Map<String, Set<Abitazione>> casePerComune; //STRING, serve per facilitare la ricerca in AzioniUtente nel metodo ritronaStanzeDalleSpecifiche
     private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
     private Map<String, Host> hostInseriti;
+
     private int mediaPostiLetto;
     private int numeroAbitazioniInserite = 0;
 
@@ -71,9 +73,26 @@ public class DataBase {
 
     }
 
-    public int mediaPostiLetto(){
+    public int mediaPostiLetto() {
 
         return (mediaPostiLetto / numeroAbitazioniInserite);
+
+    }
+
+    public Abitazione casaGettonata() {
+        LocalDate dataAttuale = LocalDate.now();
+        Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();
+        Abitazione abitazioGettonata = null;
+        int max = 0;
+        for (String emailHost : caseInseriteDallHost.keySet()) {
+            for (Abitazione abit : caseInseriteDallHost.get(emailHost)) {
+                if (abit.getMesiNumPrenotazioni().get(mesePrecendente) > max) {
+                    max = abit.getMesiNumPrenotazioni().get(mesePrecendente);
+                    abitazioGettonata = abit;
+                }
+            }
+        }
+        return  abitazioGettonata;
 
     }
 
@@ -95,4 +114,6 @@ public class DataBase {
         return casePerComune;
 
     }
+
+
 }
