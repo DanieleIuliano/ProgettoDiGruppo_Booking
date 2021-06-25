@@ -81,7 +81,6 @@ public class AzioniUtente {
 
         ritronaStanzeDalleSpecifiche(comune, inizioPrenotazione, finePrenotazione, numeroPostiLetto);
 
-
         while (true) {
 
             System.out.print("Id casa da prenotare: ");
@@ -114,6 +113,10 @@ public class AzioniUtente {
 
             }
 
+            else
+
+                System.out.println("Casa non disponibile");
+
         }
 
     }
@@ -135,8 +138,6 @@ public class AzioniUtente {
             }
         }
     }
-
-
 
     private LocalDate ritornaData(){
 
@@ -238,7 +239,6 @@ public class AzioniUtente {
         return LocalDate.of(anno, mese, giorno);
 
     }
-
 
     public Prenotazione ultimaPrenotazioneUtente(Utente utente){
 
