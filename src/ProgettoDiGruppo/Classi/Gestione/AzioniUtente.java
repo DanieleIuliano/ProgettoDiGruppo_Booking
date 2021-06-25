@@ -134,6 +134,10 @@ public class AzioniUtente {
 
     private void ritronaStanzeDalleSpecifiche(String comune, LocalDate dataInizio, LocalDate dataFine, int postiLetto){
 
+        if(dataBase.getCasePerComune().get(comune) == null){
+            System.out.println("Casa non presente");
+            return;
+        }
 
         for(Abitazione abitazione : dataBase.getCasePerComune().get(comune)){
 

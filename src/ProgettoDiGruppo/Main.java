@@ -54,8 +54,7 @@ public class Main {
 
                                 System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
 
-                            }
-                            else {
+                            } else {
 
                                 System.out.println("Accesso effettuato");
 
@@ -64,8 +63,7 @@ public class Main {
 
                         }
 
-                    }
-                    else {
+                    } else {
 
                         AzioniUtente azioniUtente = new AzioniUtente();
                         System.out.println("Cosa vuoi fare: \n|Prenotazione| Per prenotare una abitazione\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\n|Feedback|\n|CasaGettonata| La casa più gettonata\n|Exit|");
@@ -95,7 +93,7 @@ public class Main {
 
                         }
 
-                        if(scelta.equalsIgnoreCase("Feedback")) {
+                        if (scelta.equalsIgnoreCase("Feedback")) {
 
                             azioniUtente.inserisciRecenzionePerAbitazione(utente);
                             continue;
@@ -109,7 +107,7 @@ public class Main {
                            }
                            catch (NullPointerException e){
 
-                               System.out.println("Per questo mese non c'è nessuna casa scelta");
+                               System.out.println("Per questo mese non c'è nessuna casa selezionata");
 
                            }
                             continue;
@@ -166,7 +164,7 @@ public class Main {
                     } else {
 
                         AzioniHost azioniHost = new AzioniHost();
-                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Lista abitazioni \n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto|Exit|");
+                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Lista abitazioni \n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto\n|HostConPrenotazioni| Per vedere l'host con più prenotazioni\n |Exit|");
                         System.out.print("Scelta: ");
                         scelta = scanner.next();
 
@@ -181,7 +179,7 @@ public class Main {
 
                             Set<Abitazione> abitazioniHost = azioniHost.abitazioniPerHost(host.getEmail());
 
-                            if(abitazioniHost == null){
+                            if (abitazioniHost == null) {
 
                                 System.out.println("Nessuna abitazione presente");
                                 continue;
@@ -201,7 +199,7 @@ public class Main {
 
                             Set<Host> superHost = azioniHost.ritornaSuperHost();
 
-                            if(superHost.size() <= 0){
+                            if (superHost.size() <= 0) {
 
                                 System.out.println("Nessun super host presente");
                                 continue;
@@ -216,10 +214,25 @@ public class Main {
                             continue;
                         }
 
+                        if(scelta.equalsIgnoreCase("HostConPrenotazioni")) {
+
+                            try {
+
+                                System.out.println(dataBase.);
+
+                            }
+                            catch (NullPointerException e){
+
+                                System.out.println("Per questo mese non c'è nessuna casa selezionata");
+
+                            }
+                            continue;
+                        }
+
 
                         if (scelta.equalsIgnoreCase("MediaPostiLetto")) {
 
-                            System.out.println("La media è: "+ azioniHost.numeroMedioPostiLetto());
+                            System.out.println("La media è: " + azioniHost.numeroMedioPostiLetto());
                             continue;
 
                         }
@@ -244,14 +257,17 @@ public class Main {
 
             if (tipoUtente.equalsIgnoreCase("Exit")) {
 
-                System.out.println("ARRIVEDERCI!!");
+                if (tipoUtente.equalsIgnoreCase("Exit")) {
 
-                break;
+                    System.out.println("ARRIVEDERCI!!");
+
+                    break;
+
+                }
 
             }
 
         }
-
     }
 }
 

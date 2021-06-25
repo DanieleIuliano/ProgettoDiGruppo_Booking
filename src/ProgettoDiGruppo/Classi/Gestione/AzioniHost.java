@@ -5,10 +5,7 @@ import ProgettoDiGruppo.Classi.Utente.Host;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 
 public class AzioniHost {
@@ -49,7 +46,7 @@ public class AzioniHost {
 
             while ((line = file.readLine()) != null) {
 
-                if(line.contains(comune)) {
+                if(line.toLowerCase(Locale.ROOT).contains(comune)) {
 
                     if(line.length() == (comune.length() + 4)) {
 
@@ -217,7 +214,7 @@ public class AzioniHost {
 
             if (anno == LocalDate.now().getYear()) {
 
-                if (mese >= LocalDate.now().getMonthValue())
+                if (mese >= LocalDate.now().getMonthValue() && mese <= 12)
 
                     break;
 
