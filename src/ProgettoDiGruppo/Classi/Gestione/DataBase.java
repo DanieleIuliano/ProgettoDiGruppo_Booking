@@ -189,10 +189,10 @@ public class DataBase {
         addCasa(host1, abitazione2);
         addCasa(host1, abitazione3);
         addCasaPerComune("Napoli", abitazione1);
-        addCasaPerComune("Assisi", abitazione2);
-        addCasaPerComune("Campobasso", abitazione3);
+        addCasaPerComune("Puglia", abitazione2);
+        addCasaPerComune("Trentino", abitazione3);
         addCasa(host3, abitazione4);
-        addCasaPerComune("Villachiara", abitazione4);
+        addCasaPerComune("Sardegna", abitazione4);
 
     }
 
