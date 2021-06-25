@@ -22,11 +22,10 @@ public class Abitazione extends TreeSet<Abitazione> {
     private List<FeedBack> feedBacksSullAbitazione = new LinkedList<>();
     private Map<Month,Integer> mesiNumPrenotazioni = new HashMap<>();
 
-
-
     /******* Costruttore *******/
 
     public Abitazione(double prezzo, LocalDate dataInizio, LocalDate dataFine, String nome, String indirizzo, int numeroLocali, int numeroPostiLetto, int piano,  String emailHost) {
+
         this.prezzo = prezzo;
         this.durata = new Durata(dataInizio, dataFine);
         id = UUID.randomUUID().toString();
@@ -36,10 +35,9 @@ public class Abitazione extends TreeSet<Abitazione> {
         this.numeroPostiLetto = numeroPostiLetto;
         this.piano = piano;
         this.emailHost = emailHost;
+        setMesiPrenotazione();
+
     }
-
-
-
 
     /******* Getter e Setter *******/
     public Map<Month, Integer> getMesiNumPrenotazioni() {
@@ -148,20 +146,23 @@ public class Abitazione extends TreeSet<Abitazione> {
     }
 
     /******* CompareTo in base a numero di volte prenotate *******/
-    public int compareTo(Abitazione o) {
-
-        return Integer.compare(o.getNumDiVoltePrenotata(), getNumDiVoltePrenotata());
-
-    }
-
     /******* Funzioni della classe *******/
 
-    public int getNumDiVoltePrenotata() {
-        return numDiVoltePrenotata;
-    }
+    public void setMesiPrenotazione(){
 
-    public void setNumDiVoltePrenotata() {
-        numDiVoltePrenotata = numDiVoltePrenotata + 1;
+        mesiNumPrenotazioni.put(Month.JANUARY, 0);
+        mesiNumPrenotazioni.put(Month.FEBRUARY, 0);
+        mesiNumPrenotazioni.put(Month.MARCH, 0);
+        mesiNumPrenotazioni.put(Month.APRIL, 0);
+        mesiNumPrenotazioni.put(Month.MAY, 0);
+        mesiNumPrenotazioni.put(Month.JULY, 0);
+        mesiNumPrenotazioni.put(Month.JUNE, 0);
+        mesiNumPrenotazioni.put(Month.AUGUST, 0);
+        mesiNumPrenotazioni.put(Month.SEPTEMBER, 0);
+        mesiNumPrenotazioni.put(Month.OCTOBER, 0);
+        mesiNumPrenotazioni.put(Month.NOVEMBER, 0);
+        mesiNumPrenotazioni.put(Month.DECEMBER, 0);
+
     }
 
     public void stampaGiorniDisponibili() {

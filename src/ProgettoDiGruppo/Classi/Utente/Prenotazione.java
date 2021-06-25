@@ -29,7 +29,6 @@ public class Prenotazione {
         this.abitazione = abitazione;
         id = UUID.randomUUID().toString();
         abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
-        abitazione.setNumDiVoltePrenotata();
         add1Mese(dataInizio, dataFine);
         this.emailUtente = emailUtente;
 
