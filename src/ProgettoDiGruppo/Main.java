@@ -68,7 +68,7 @@ public class Main {
                     else {
 
                         AzioniUtente azioniUtente = new AzioniUtente();
-                        System.out.println("Cosa vuoi fare: \n|Prenotazione| Per prenotare una abitazione\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\n|Feedback|\n|Exit|");
+                        System.out.println("Cosa vuoi fare: \n|Prenotazione| Per prenotare una abitazione\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\n|Feedback|\n|CasaGettonata| La casa più gettonata\n|Exit|");
                         System.out.print("Scelta: ");
                         scelta = scanner.next();
 
@@ -98,6 +98,20 @@ public class Main {
                         if(scelta.equalsIgnoreCase("Feedback")) {
 
                             azioniUtente.inserisciRecenzionePerAbitazione(utente);
+                            continue;
+                        }
+                        if(scelta.equalsIgnoreCase("CasaGettonata")) {
+
+                           try {
+
+                               System.out.println(dataBase.casaGettonata());
+
+                           }
+                           catch (NullPointerException e){
+
+                               System.out.println("Per questo mese non c'è nessuna casa scelta");
+
+                           }
                             continue;
                         }
 
