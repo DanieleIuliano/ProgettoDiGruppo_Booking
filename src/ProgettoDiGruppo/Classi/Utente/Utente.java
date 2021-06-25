@@ -81,8 +81,6 @@ public class Utente {
         return "Utente{" +
                 "nome='" + nome + '\'' +
                 ", cognome='" + cognome + '\'' +
-                ", email='" + email + '\'' +
-                ", feedBacks=" + feedBacks +
-                '}';
+                ", email='" + email + '\'';
     }
 }

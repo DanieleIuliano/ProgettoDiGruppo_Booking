@@ -90,7 +90,7 @@ public class DataBase {
 
     public Abitazione casaGettonata(Month mese) {
         LocalDate dataAttuale = LocalDate.now();
-        Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();
+        Month mesePrecendente = mese;
         Abitazione abitazioGettonata = null;
         int max = 0;
         for (String emailHost : caseInseriteDallHost.keySet()) {
@@ -106,11 +106,14 @@ public class DataBase {
         return  abitazioGettonata;
 
     }
-    public void hostPiuPrenotazioniUltimoMese() {
+
+    public Host hostPiuPrenotazioniUltimoMese(Month mese) {
         LocalDate dataAttuale = LocalDate.now();
-        Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();
+        Month mesePrecendente = mese;
         Host hostPiuGettonato = null;
+
         int max = 0;
+        int numPrenotazioniUltimoMese = 0;
         int utentiHost = 0;
         for (String emailHost : caseInseriteDallHost.keySet()) {
             for (Abitazione abit : caseInseriteDallHost.get(emailHost)) {
@@ -119,10 +122,15 @@ public class DataBase {
 
                 }
             }
+
+            if(numPrenotazioniUltimoMese<max){
+                numPrenotazioniUltimoMese=max;
+                hostPiuGettonato=hostInseriti.get(emailHost);
+            }
         }
+        return hostPiuGettonato;
 
     }
-
 
     public Map<String, Set<Abitazione>> getCaseInseriteDallHost() {
         return caseInseriteDallHost;

@@ -8,6 +8,9 @@ import ProgettoDiGruppo.Classi.Gestione.Gestione;
 import ProgettoDiGruppo.Classi.Utente.Host;
 import ProgettoDiGruppo.Classi.Utente.Prenotazione;
 import ProgettoDiGruppo.Classi.Utente.Utente;
+
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -101,8 +104,10 @@ public class Main {
                         if(scelta.equalsIgnoreCase("CasaGettonata")) {
 
                            try {
-
-                               System.out.println(dataBase.casaGettonata());
+                               int numeroMese;
+                               System.out.print("Numero mese: ");
+                               numeroMese = scanner.nextInt();
+                               System.out.println(dataBase.casaGettonata(Month.of(numeroMese)));
 
                            }
                            catch (NullPointerException e){
@@ -218,7 +223,10 @@ public class Main {
 
                             try {
 
-                                System.out.println(dataBase.);
+                                int numeroMese;
+                                System.out.print("Numero mese: ");
+                                numeroMese = scanner.nextInt();
+                                System.out.println(dataBase.hostPiuPrenotazioniUltimoMese(Month.of(numeroMese)));
 
                             }
                             catch (NullPointerException e){
