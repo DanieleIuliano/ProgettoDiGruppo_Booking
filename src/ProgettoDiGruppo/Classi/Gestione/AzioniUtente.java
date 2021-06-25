@@ -1,45 +1,33 @@
 package ProgettoDiGruppo.Classi.Gestione;
 
 import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
-import ProgettoDiGruppo.Classi.Utente.Host;
+import ProgettoDiGruppo.Classi.Abitazione.Durata;
+import ProgettoDiGruppo.Classi.Utente.Prenotazione;
+import ProgettoDiGruppo.Classi.Utente.Utente;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.InputMismatchException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+public class AzioniUtente {
 
-public class AzioniHost {
-
-    private DataBase dataBase = DataBase.getInstance();
     private Scanner scanner = new Scanner(System.in);
+    private DataBase dataBase = DataBase.getInstance();
+    Map<String, Abitazione> abitazioniDisponibili = new HashMap<>();
 
-    public void inserisciAbitazione(Host host) {
+    public void prenotaAbitazione(Utente utente) {
 
+        LocalDate inizioPrenotazione;
+        LocalDate finePrenotazione;
+        int numeroPostiLetto;
         String line;
         String comune = null;
-        String indirizzo;
-        int numeroPostiLetto = 0;
-        int piano = 0;
-        int numeroLocali = 0;
-        LocalDate dataInizio;
-        LocalDate dataFine;
-        String nome;
-        double prezzo;
-        System.out.println("Comune abitazione: ");
-
-        while (true) {
-
-            System.out.print("Nome: ");
-            nome = scanner.nextLine();
-
-            if (nome.length() < 3)
-
-                break;
-
-            System.out.println("Nome troppo corto");
-
-        }
+        String idCasa;
 
         try (BufferedReader file = new BufferedReader(new FileReader("src/ProgettoDiGruppo/Classi/CodiciCatastali.text"))) {
 
@@ -73,114 +61,85 @@ public class AzioniHost {
 
         }
 
-        while (true) {
-
-            System.out.print("Indirizzo: ");
-            indirizzo = scanner.nextLine();
-
-            if (indirizzo.length() > 3)
-
-                break;
-
-            System.out.println("Indirizzo non valido");
-
-        }
+        System.out.println("Da che data vuoi prenotare la casa? ");
+        inizioPrenotazione = ritornaData();
+        System.out.println("Fino a che data vuoi prenotare la casa? ");
+        finePrenotazione = ritornaData();
 
         while (true) {
 
-            System.out.print("Posti letto: ");
-            try {
-
-                numeroPostiLetto = scanner.nextInt();
-
-            } catch (InputMismatchException inputMismatchException) {
-
-                System.out.println("Devi mettere un numero!");
-
-            }
+            System.out.println("Posti letto: ");
+            numeroPostiLetto = scanner.nextInt();
 
             if (numeroPostiLetto > 0)
 
                 break;
 
-            System.out.println("ERRORE, POSTI NON VALIDI");
+            System.out.println("HAI BISOGNO DI ALMENO UN LETTO, RIPOSARSI E' IMPORTANTE");
 
         }
 
+        ritronaStanzeDalleSpecifiche(comune, inizioPrenotazione, finePrenotazione, numeroPostiLetto);
+
+
         while (true) {
 
-            System.out.print("Numero locali: ");
-            try {
+            System.out.print("Id casa da prenotare: ");
+            idCasa = scanner.nextLine();
+            int numeroGiorniPrenotati = inizioPrenotazione.getDayOfYear() - finePrenotazione.getDayOfYear();
 
-                numeroLocali = scanner.nextInt();
+            if(numeroGiorniPrenotati < 0)
 
-            } catch (InputMismatchException inputMismatchException) {
+                numeroGiorniPrenotati *= -1;
 
-                System.out.println("Devi mettere un numero!");
+            if(abitazioniDisponibili.containsKey(idCasa)){
+
+                String scelta;
+                System.out.print("Il prezzo da pagare è di: " + (abitazioniDisponibili.get(idCasa).getPrezzo() * numeroGiorniPrenotati));
+                System.out.print("Prenoti: ");
+                scelta = scanner.nextLine();
+
+                if(scelta.equalsIgnoreCase("Si")) {
+
+                    Prenotazione prenotazione = new Prenotazione(inizioPrenotazione,finePrenotazione,utente.getEmail(),abitazioniDisponibili.get(idCasa));
+
+                    System.out.println("Prenotazione effettuata!");
+
+                }
+
+                else
+
+                    System.out.println("Okay, sarà per la prossima");
 
             }
 
-            if (numeroLocali > 0)
-
-                break;
-
-            System.out.println("ERRORE!");
-
         }
 
-        while (true) {
 
-            System.out.print("Piano: ");
-            try {
 
-                piano = scanner.nextInt();
 
-            } catch (InputMismatchException inputMismatchException) {
+    }
 
-                System.out.println("Devi mettere un numero!");
+    private void ritronaStanzeDalleSpecifiche(String comune, LocalDate dataInizio, LocalDate dataFine, int postiLetto){
 
+        Durata durata = new Durata(dataInizio, dataFine);
+
+        for(Abitazione abitazione : dataBase.getCasePerComune().get(comune)){
+
+            if(abitazione.getNumeroPostiLetto() >= postiLetto){
+
+                if (abitazione.getDurata().isDataDisponibile(dataInizio, dataFine)) {
+
+                    abitazioniDisponibili.put(abitazione.getId(), abitazione);
+                    System.out.println(abitazione.toString());
+
+                }
             }
 
-            if (piano > 0)
-
-                break;
-
-            System.out.println("ERRORE, PIANO NON VALIDI");
-
         }
-
-        System.out.println("Informazioni sull'inizio della disponibilità dell'abitazione");
-        dataInizio = ritornaData();
-
-        System.out.println("Informazioni sulla fine della disponibilità dell'abitazione");
-        dataFine = ritornaData();
-
-        while (true) {
-
-            System.out.println("Prezzo settimanale: ");
-            prezzo = scanner.nextDouble();
-
-            if (prezzo > 0)
-
-                break;
-
-            System.out.println("Prezzo non valido");
-
-        }
-
-        Abitazione abitazione = new Abitazione(prezzo, dataInizio, dataFine, nome, indirizzo, numeroLocali, numeroPostiLetto, piano);
-        dataBase.addCasa(host, abitazione);
-        dataBase.addCasaPerComune(comune, abitazione);
 
     }
 
-
-    public void inserisciAbitazione(Host host, Abitazione abitazione, String comune) {
-
-        dataBase.addCasa(host, abitazione);
-        dataBase.addCasaPerComune(comune, abitazione);
-
-    }
 
 
     private LocalDate ritornaData(){
@@ -285,4 +244,7 @@ public class AzioniHost {
     }
 
 
+
 }
+
+

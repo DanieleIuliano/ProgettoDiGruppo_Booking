@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class Gestione {
 
-    DataBase dataBase = DataBase.getInstance();
-    Scanner scanner = new Scanner(System.in);
+    private DataBase dataBase = DataBase.getInstance();
+    private Scanner scanner = new Scanner(System.in);
 
     public void registrazione() {
 

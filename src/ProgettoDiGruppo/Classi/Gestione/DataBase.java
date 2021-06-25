@@ -10,6 +10,7 @@ import java.util.*;
 public class DataBase {
 
     private Map<String, Set<Abitazione>> caseInserite; // STRING == CODICE HOST
+    private Map<String, Set<Abitazione>> casePerComune; //STRING, serve per facilitare la ricerca in AzioniUtente nel metodo ritronaStanzeDalleSpecifiche
     private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE
     private Map<String, Host> hostInseriti;
     private Map<String, Set<Prenotazione>> prenotazioniEffettuate;
@@ -24,6 +25,7 @@ public class DataBase {
         utentiInseriti = new HashMap<>(); //STRING == EMAIL UTENTE
         hostInseriti = new HashMap<>();
         prenotazioniEffettuate = new HashMap<>();
+        casePerComune = new HashMap<>();
 
     }
 
@@ -60,6 +62,12 @@ public class DataBase {
 
     }
 
+    public void addCasaPerComune(String comune, Abitazione abitazione) {
+
+        casePerComune.put(comune, Collections.singleton(abitazione));
+
+    }
+
     public int mediaPostiLetto(){
 
         return (mediaPostiLetto / numeroAbitazioniInserite);
@@ -81,5 +89,9 @@ public class DataBase {
 
     public Map<String, Set<Prenotazione>> getPrenotazioniEffettuate() {
         return prenotazioniEffettuate;
+    }
+
+    public Map<String, Set<Abitazione>> getCasePerComune() {
+        return casePerComune;
     }
 }

@@ -11,31 +11,22 @@ public class Prenotazione {
 
     private String id;
     private String emailUtente;
-    private int numeroPostiDaPrenotare;
     private Abitazione abitazione;
 
     /******* Costruttore *******/
 
-    public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione, int numeroPostiDaPrenotare) {
+    public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione) {
 
         id = UUID.randomUUID().toString();
         abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
         abitazione.setNumDiVoltePrenotata();
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
-        this.numeroPostiDaPrenotare = numeroPostiDaPrenotare;
-        abitazione.setNumeroPostiLetto(numeroPostiDaPrenotare);
+
     }
 
     /******* Getter e Setter *******/
     //CONTROLLI, TO STRING /DATA INIZIO E FINE
-    public int getNumeroPostiDaPrenotare() {
-        return numeroPostiDaPrenotare;
-    }
-
-    public void setNumeroPostiDaPrenotare(int numeroPostiDaPrenotare) {
-        this.numeroPostiDaPrenotare = numeroPostiDaPrenotare;
-    }
 
     public Abitazione getAbitazione() {
         return abitazione;

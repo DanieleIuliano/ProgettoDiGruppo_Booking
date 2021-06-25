@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Abitazione extends TreeSet<Abitazione> {
 
-    private double prezzo;
+    private double prezzo; // Al giorno
     private Durata durata;
     private String id;
     private String nome;
@@ -98,7 +98,7 @@ public class Abitazione extends TreeSet<Abitazione> {
     @Override
     public String toString() {
         return "Abitazione{" +
-                "prezzo=" + prezzo +
+                "prezzo giornaliero=" + prezzo +
                 ", id='" + id + '\'' +
                 ", durata='" + getDurata().toString() +
                 ", nome='" + nome + '\'' +

@@ -144,6 +144,7 @@ public class Main {
 
         }
 */
+        /*
         LocalDate data1 = LocalDate.of(2021, 6, 24);
         LocalDate data2 = LocalDate.of(2021, 8, 24);
         LocalDate data3 = LocalDate.of(2021, 7, 24);
@@ -155,7 +156,17 @@ public class Main {
         ab1.getDurata().rimuoviDatePrenotate(data3,data4);
         System.out.println(ab1);
         System.out.println(ab1.getNumDiVoltePrenotata());
-
+*/
+        LocalDate today = LocalDate.now();
+        LocalDate plusOneMonth = today.plusMonths(1);
+        LocalDate plusOneYear = today.plusYears(1);
+        int giorno = today.minusDays(31).getDayOfYear() - today.getDayOfYear()  ;
+        LocalDate plusOneWeek = today.plusWeeks(1);
+        System.out.println(giorno);
+        System.out.println(plusOneMonth);
+        System.out.println(plusOneYear);
+        System.out.println(plusOneWeek);
+        System.out.println(today);
 
 
     }

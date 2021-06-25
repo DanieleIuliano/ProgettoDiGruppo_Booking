@@ -59,6 +59,25 @@ public class Durata {
         }
     }
 
+    public boolean isDataDisponibile(LocalDate dataInizioPren, LocalDate dataFinePren){
+
+        List<LocalDate> giorniDaPrenotare = new ArrayList<>();
+
+        for (LocalDate d = dataInizioPren; !d.isAfter(dataFinePren); d = d.plusDays(1)) {
+
+            giorniDaPrenotare.add(d);
+
+        }
+
+        if(dates.contains(giorniDaPrenotare))
+
+            return true;
+
+        return false;
+
+
+    }
+
     public void rimuoviDatePrenotate(LocalDate dataInizioPren, LocalDate dataFinePren) {
         List<LocalDate> datePrenotate = new ArrayList<>();
         for (LocalDate d = dataInizioPren; !d.isAfter(dataFinePren); d = d.plusDays(1)) {
