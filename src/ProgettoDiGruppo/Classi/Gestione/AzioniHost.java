@@ -50,9 +50,13 @@ public class AzioniHost {
 
             while ((line = file.readLine()) != null) {
 
-                if (line.contains(comune)) {
+                if(line.contains(comune)) {
 
-                    break;
+                    if(line.length() == (comune.length() + 4)) {
+
+                        break;
+
+                    }
 
                 }
 

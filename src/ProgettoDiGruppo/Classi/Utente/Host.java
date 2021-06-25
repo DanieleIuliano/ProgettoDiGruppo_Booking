@@ -20,6 +20,13 @@ public class Host extends Utente {
 
     }
 
+    public Host(Utente utente) {
+
+        super(utente.getNome(), utente.getCognome(), utente.getEmail(), utente.getIndirizzo(), utente.getPassword());
+        codiceHost = UUID.randomUUID().toString();
+
+    }
+
     // Varie cose
     public String getCodiceHost() {
         return codiceHost;
@@ -54,6 +61,8 @@ public class Host extends Utente {
     public void setSuperHost(boolean superHost) {
         this.superHost = superHost;
     }
+
+
 
 
 }
