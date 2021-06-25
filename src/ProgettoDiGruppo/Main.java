@@ -109,7 +109,7 @@ public class Main {
                            }
                            catch (NullPointerException e){
 
-                               System.out.println("Per questo mese non c'è nessuna casa scelta");
+                               System.out.println("Per questo mese non c'è nessuna casa selezionata");
 
                            }
                             continue;
@@ -166,7 +166,7 @@ public class Main {
                     } else {
 
                         AzioniHost azioniHost = new AzioniHost();
-                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Lista abitazioni \n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto|Exit|");
+                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Lista abitazioni \n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto\n|HostConPrenotazioni| Per vedere l'host con più prenotazioni\n |Exit|");
                         System.out.print("Scelta: ");
                         scelta = scanner.next();
 
@@ -211,6 +211,21 @@ public class Main {
                             for (Host hosts : superHost) {
 
                                 System.out.println(hosts.toString());
+
+                            }
+                            continue;
+                        }
+
+                        if(scelta.equalsIgnoreCase("HostConPrenotazioni")) {
+
+                            try {
+
+                                System.out.println(dataBase.);
+
+                            }
+                            catch (NullPointerException e){
+
+                                System.out.println("Per questo mese non c'è nessuna casa selezionata");
 
                             }
                             continue;
