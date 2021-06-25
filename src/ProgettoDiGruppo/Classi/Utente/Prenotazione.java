@@ -5,12 +5,9 @@ import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
 
 import java.awt.event.PaintEvent;
 import java.time.LocalDate;
-<<<<<<< HEAD
 
-=======
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
->>>>>>> main
 import java.util.Objects;
 import java.util.UUID;
 
@@ -32,7 +29,7 @@ public class Prenotazione {
         id = UUID.randomUUID().toString();
         abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);
         abitazione.setNumDiVoltePrenotata();
-        add1Mese(dataInizio,dataFine);
+        add1Mese(dataInizio, dataFine);
         this.emailUtente = emailUtente;
         this.abitazione = abitazione;
 
@@ -40,7 +37,6 @@ public class Prenotazione {
 
     /******* Getter e Setter *******/
     //CONTROLLI, TO STRING /DATA INIZIO E FINE
-
     public Abitazione getAbitazione() {
         return abitazione;
     }
@@ -75,19 +71,20 @@ public class Prenotazione {
         return Objects.hash(id);
     }
 
-<<<<<<< HEAD
-    public void add1Mese(LocalDate dataInizioPren, LocalDate dataFinePren){
-        if(dataInizioPren.getMonth().equals(dataFinePren.getMonth())){
+
+    public void add1Mese(LocalDate dataInizioPren, LocalDate dataFinePren) {
+        if (dataInizioPren.getMonth().equals(dataFinePren.getMonth())) {
             int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
-            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn +1);
+            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn + 1);
             return;
-        }else {
+        } else {
             int numPrenMeseFin = abitazione.getMesiNumPrenotazioni().get(dataFinePren.getMonth());
-            abitazione.getMesiNumPrenotazioni().put(dataFinePren.getMonth(),numPrenMeseFin+1);
+            abitazione.getMesiNumPrenotazioni().put(dataFinePren.getMonth(), numPrenMeseFin + 1);
             int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
-            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn +1);
+            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn + 1);
         }
-=======
+
+    }
 
     @Override
     public String toString() {
@@ -97,6 +94,5 @@ public class Prenotazione {
                 ", pagamento=" + pagamento +
                 ", numeroGiorni=" + numeroGiorni +
                 '}';
->>>>>>> main
     }
 }
