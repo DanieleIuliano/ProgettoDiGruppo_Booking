@@ -214,7 +214,7 @@ public class AzioniHost {
 
             if (anno == LocalDate.now().getYear()) {
 
-                if (mese >= LocalDate.now().getMonthValue())
+                if (mese >= LocalDate.now().getMonthValue() && mese <= 12)
 
                     break;
 

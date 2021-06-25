@@ -88,13 +88,15 @@ public class DataBase {
 
 
 
-    public Abitazione casaGettonata() {
+    public Abitazione casaGettonata(Month mese) {
         LocalDate dataAttuale = LocalDate.now();
         Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();
         Abitazione abitazioGettonata = null;
         int max = 0;
         for (String emailHost : caseInseriteDallHost.keySet()) {
+
             for (Abitazione abit : caseInseriteDallHost.get(emailHost)) {
+
                 if (abit.getMesiNumPrenotazioni().get(mesePrecendente) > max) {
                     max = abit.getMesiNumPrenotazioni().get(mesePrecendente);
                     abitazioGettonata = abit;
@@ -102,6 +104,22 @@ public class DataBase {
             }
         }
         return  abitazioGettonata;
+
+    }
+    public void hostPiuPrenotazioniUltimoMese() {
+        LocalDate dataAttuale = LocalDate.now();
+        Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();
+        Host hostPiuGettonato = null;
+        int max = 0;
+        int utentiHost = 0;
+        for (String emailHost : caseInseriteDallHost.keySet()) {
+            for (Abitazione abit : caseInseriteDallHost.get(emailHost)) {
+                if (abit.getMesiNumPrenotazioni().get(mesePrecendente) > max) {
+                    max = abit.getMesiNumPrenotazioni().get(mesePrecendente);
+
+                }
+            }
+        }
 
     }
 
