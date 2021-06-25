@@ -148,7 +148,7 @@ public class Main {
                     } else {
 
                         AzioniHost azioniHost = new AzioniHost();
-                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Abitazione per l'host\n|SuperHost| Visualizza tutti i super host\n|Exit|");
+                        System.out.println("Cosa vuoi fare: \n|InserisciAbitazione| Per inserire un'abitazione\n|AbitazioniHost| Abitazione per l'host\n|SuperHost| Visualizza tutti i super host\n|MediaPostiLetto| Per vedere la media dei posti letto|Exit|");
                         System.out.print("Scelta: ");
                         scelta = scanner.next();
 
@@ -181,9 +181,17 @@ public class Main {
                                 System.out.println(hosts.toString());
 
                             }
+                            continue;
+                        }
+
+
+                        if (scelta.equalsIgnoreCase("MediaPostiLetto")) {
+
+                            System.out.println("La media è: "+ azioniHost.numeroMedioPostiLetto());
+                            continue;
 
                         }
-                        continue;
+
 
                     }
 
@@ -192,8 +200,7 @@ public class Main {
 
                         break;
 
-                    }
-                    else {
+                    } else {
 
                         System.out.println("Scelta non valida!");
                         continue;
@@ -204,27 +211,7 @@ public class Main {
 
             }
 
-<<<<<<< HEAD
-        }
-<<<<<<< Updated upstream
-=======
-*/
-        /*
-        LocalDate data1 = LocalDate.of(2021, 6, 24);
-        LocalDate data2 = LocalDate.of(2021, 8, 24);
-        LocalDate data3 = LocalDate.of(2021, 7, 24);
-        LocalDate data4 = LocalDate.of(2021, 8, 24);
-        Durata calendario1 = new Durata(data1,data2);
-        Abitazione ab1 = new Abitazione(20,data1,data2,"casaFusco","viale",2,3,3);
-        System.out.println(ab1);
-        Prenotazione p1 = new Prenotazione(data3,data4,"coldfierz@gmail",ab1,1);
-        System.out.println(ab1);
-        System.out.println(ab1.getNumDiVoltePrenotata());
-*/
->>>>>>> Stashed changes
-=======
-            if(tipoUtente.equalsIgnoreCase("Exit")) {
->>>>>>> main
+            if (tipoUtente.equalsIgnoreCase("Exit")) {
 
                 System.out.println("ARRIVEDERCI!!");
 
@@ -235,6 +222,6 @@ public class Main {
         }
 
     }
-
 }
+
 

@@ -318,6 +318,12 @@ public class AzioniHost {
 
     }
 
+    public int numeroMedioPostiLetto(){
+
+        return dataBase.mediaPostiLetto();
+
+    }
+
 
 
 }

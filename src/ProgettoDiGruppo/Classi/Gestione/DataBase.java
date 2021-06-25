@@ -42,7 +42,6 @@ public class DataBase {
 
     }
 
-
     public void addUtente(Utente utente) {
 
         utentiInseriti.put(utente.getEmail(), utente);
@@ -79,6 +78,8 @@ public class DataBase {
         return (mediaPostiLetto / numeroAbitazioniInserite);
 
     }
+
+
 
     public Abitazione casaGettonata() {
         LocalDate dataAttuale = LocalDate.now();
