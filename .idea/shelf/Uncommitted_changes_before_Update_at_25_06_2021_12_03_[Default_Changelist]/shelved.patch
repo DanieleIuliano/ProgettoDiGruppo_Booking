@@ -1,0 +1,137 @@
+Index: src/ProgettoDiGruppo/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo;\r\n\r\nimport ProgettoDiGruppo.Classi.Abitazione.Abitazione;\r\nimport ProgettoDiGruppo.Classi.Abitazione.Durata;\r\nimport ProgettoDiGruppo.Classi.Gestione.AzioniHost;\r\nimport ProgettoDiGruppo.Classi.Gestione.AzioniUtente;\r\nimport ProgettoDiGruppo.Classi.Gestione.Gestione;\r\nimport ProgettoDiGruppo.Classi.Utente.Host;\r\nimport ProgettoDiGruppo.Classi.Utente.Prenotazione;\r\nimport ProgettoDiGruppo.Classi.Utente.Utente;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.Period;\r\nimport java.util.Date;\r\nimport java.util.Scanner;\r\nimport java.util.Set;\r\n\r\npublic class Main {\r\n\r\n    public static void main(String[] args) {\r\n\r\n        Gestione gestione = new Gestione();\r\n        Scanner scanner = new Scanner(System.in);\r\n        String scelta;\r\n        String tipoUtente;\r\n        Utente utente = null;\r\n        Host host = null;\r\n\r\n        while (true) {\r\n            System.out.print(\"Benvenuto in Booking\\nChe ruolo hai?\\n|Host|\\n|Utente|\\n|Exit|\\nScelta: \");\r\n            tipoUtente = scanner.next();\r\n\r\n            if (tipoUtente.equalsIgnoreCase(\"Utente\")) {\r\n                while (true) {\r\n\r\n                    if (utente == null) {\r\n\r\n                        System.out.println(\"|Registrazione|\\n|Accesso|\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Registrazione\")) {\r\n\r\n                            gestione.registrazione();\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Accesso\")) {\r\n\r\n                            utente = gestione.accesso();\r\n\r\n                            if (utente == null) {\r\n\r\n                                System.out.println(\"Accesso non riuscito, se non sei ancora registrato registrati!\");\r\n                                continue;\r\n\r\n                            } else {\r\n\r\n                                System.out.println(\"Accesso effettuato\");\r\n                                continue;\r\n\r\n                            }\r\n\r\n                        }\r\n\r\n                    } else {\r\n\r\n                        AzioniUtente azioniUtente = new AzioniUtente();\r\n                        System.out.println(\"Cosa vuoi fare: \\n|Prenotazione| Per prenotare una abitazione\\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Prenotazione\")) {\r\n\r\n                            azioniUtente.prenotaAbitazione(utente);\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"UtlimaPrenotazione\")) {\r\n\r\n                            Prenotazione prenotazione = azioniUtente.ultimaPrenotazioneUtente(utente);\r\n                            if (prenotazione == null) {\r\n\r\n                                System.out.println(\"Devi prima effettuare una prenotazione!\");\r\n                                continue;\r\n\r\n                            }\r\n\r\n                            System.out.println(prenotazione.toString());\r\n\r\n                            continue;\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n                    if (scelta.equalsIgnoreCase(\"Exit\")) {\r\n\r\n                        System.out.println(\"ARRIVEDERCI!!\");\r\n                        break;\r\n\r\n                    } else {\r\n\r\n                        System.out.println(\"Scelta non valida!\");\r\n                        continue;\r\n\r\n                    }\r\n\r\n                }\r\n\r\n            } else if (tipoUtente.equalsIgnoreCase(\"Host\")) {\r\n\r\n                while (true) {\r\n\r\n                    if (host == null) {\r\n\r\n                        System.out.println(\"|Registrazione|\\n|Accesso|\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Registrazione\")) {\r\n\r\n                            gestione.registrazione();\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Accesso\")) {\r\n\r\n                            host = gestione.accessoHost();\r\n\r\n                            if (utente == null) {\r\n\r\n                                System.out.println(\"Accesso non riuscito, se non sei ancora registrato registrati!\");\r\n                                continue;\r\n\r\n                            } else {\r\n\r\n                                System.out.println(\"Accesso effettuato\");\r\n                                continue;\r\n\r\n                            }\r\n\r\n                        }\r\n\r\n                    } else {\r\n\r\n                        AzioniHost azioniHost = new AzioniHost();\r\n                        System.out.println(\"Cosa vuoi fare: \\n|InserisciAbitazione| Per inserire un'abitazione\\n|AbitazioniHost| Abitazione per l'host\\n|SuperHost| Visualizza tutti i super host\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"InserisciAbitazione\")) {\r\n\r\n                            azioniHost.inserisciAbitazione(host);\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"AbitazioniHost\")) {\r\n\r\n                            Set<Abitazione> abitazioniHost = azioniHost.abitazioniPerHost(host.getEmail());\r\n\r\n                            for (Abitazione abitazione : abitazioniHost) {\r\n\r\n                                System.out.println(abitazione.toString());\r\n\r\n                            }\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"SuperHost\")) {\r\n\r\n                            Set<Host> superHost = azioniHost.ritornaSuperHost();\r\n\r\n                            for (Host hosts : superHost) {\r\n\r\n                                System.out.println(hosts.toString());\r\n\r\n                            }\r\n\r\n                        }\r\n                        continue;\r\n\r\n                    }\r\n\r\n\r\n                    if (scelta.equalsIgnoreCase(\"Exit\")) {\r\n\r\n                        break;\r\n\r\n                    }\r\n                    else {\r\n\r\n                        System.out.println(\"Scelta non valida!\");\r\n                        continue;\r\n\r\n                    }\r\n\r\n                }\r\n\r\n            }\r\n\r\n<<<<<<< HEAD\r\n        }\r\n<<<<<<< Updated upstream\r\n=======\r\n*/\r\n        /*\r\n        LocalDate data1 = LocalDate.of(2021, 6, 24);\r\n        LocalDate data2 = LocalDate.of(2021, 8, 24);\r\n        LocalDate data3 = LocalDate.of(2021, 7, 24);\r\n        LocalDate data4 = LocalDate.of(2021, 8, 24);\r\n        Durata calendario1 = new Durata(data1,data2);\r\n        Abitazione ab1 = new Abitazione(20,data1,data2,\"casaFusco\",\"viale\",2,3,3);\r\n        System.out.println(ab1);\r\n        Prenotazione p1 = new Prenotazione(data3,data4,\"coldfierz@gmail\",ab1,1);\r\n        System.out.println(ab1);\r\n        System.out.println(ab1.getNumDiVoltePrenotata());\r\n*/\r\n>>>>>>> Stashed changes\r\n=======\r\n            if(tipoUtente.equalsIgnoreCase(\"Exit\")) {\r\n>>>>>>> main\r\n\r\n                System.out.println(\"ARRIVEDERCI!!\");\r\n\r\n                break;\r\n\r\n            }\r\n\r\n        }\r\n\r\n    }\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Main.java b/src/ProgettoDiGruppo/Main.java
+--- a/src/ProgettoDiGruppo/Main.java	
++++ b/src/ProgettoDiGruppo/Main.java	
+@@ -1,17 +1,12 @@
+ package ProgettoDiGruppo;
+ 
+ import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
+-import ProgettoDiGruppo.Classi.Abitazione.Durata;
+ import ProgettoDiGruppo.Classi.Gestione.AzioniHost;
+ import ProgettoDiGruppo.Classi.Gestione.AzioniUtente;
+ import ProgettoDiGruppo.Classi.Gestione.Gestione;
+ import ProgettoDiGruppo.Classi.Utente.Host;
+ import ProgettoDiGruppo.Classi.Utente.Prenotazione;
+ import ProgettoDiGruppo.Classi.Utente.Utente;
+-
+-import java.time.LocalDate;
+-import java.time.Period;
+-import java.util.Date;
+ import java.util.Scanner;
+ import java.util.Set;
+ 
+@@ -53,17 +48,16 @@
+                             if (utente == null) {
+ 
+                                 System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
+-                                continue;
+ 
+                             } else {
+ 
+                                 System.out.println("Accesso effettuato");
+-                                continue;
++
++                            }
++                            continue;
+ 
+-                            }
++                        }
+ 
+-                        }
+-
+                     } else {
+ 
+                         AzioniUtente azioniUtente = new AzioniUtente();
+@@ -88,7 +82,7 @@
+ 
+                             }
+ 
+-                            System.out.println(prenotazione.toString());
++                            System.out.println(prenotazione);
+ 
+                             continue;
+ 
+@@ -104,7 +98,6 @@
+                     } else {
+ 
+                         System.out.println("Scelta non valida!");
+-                        continue;
+ 
+                     }
+ 
+@@ -134,17 +127,16 @@
+                             if (utente == null) {
+ 
+                                 System.out.println("Accesso non riuscito, se non sei ancora registrato registrati!");
+-                                continue;
+ 
+                             } else {
+ 
+                                 System.out.println("Accesso effettuato");
+-                                continue;
++
++                            }
++                            continue;
+ 
+-                            }
++                        }
+ 
+-                        }
+-
+                     } else {
+ 
+                         AzioniHost azioniHost = new AzioniHost();
+@@ -196,7 +188,6 @@
+                     else {
+ 
+                         System.out.println("Scelta non valida!");
+-                        continue;
+ 
+                     }
+ 
+@@ -204,27 +195,8 @@
+ 
+             }
+ 
+-<<<<<<< HEAD
+-        }
+-<<<<<<< Updated upstream
+-=======
+-*/
+-        /*
+-        LocalDate data1 = LocalDate.of(2021, 6, 24);
+-        LocalDate data2 = LocalDate.of(2021, 8, 24);
+-        LocalDate data3 = LocalDate.of(2021, 7, 24);
+-        LocalDate data4 = LocalDate.of(2021, 8, 24);
+-        Durata calendario1 = new Durata(data1,data2);
+-        Abitazione ab1 = new Abitazione(20,data1,data2,"casaFusco","viale",2,3,3);
+-        System.out.println(ab1);
+-        Prenotazione p1 = new Prenotazione(data3,data4,"coldfierz@gmail",ab1,1);
+-        System.out.println(ab1);
+-        System.out.println(ab1.getNumDiVoltePrenotata());
+-*/
+->>>>>>> Stashed changes
+-=======
++
+             if(tipoUtente.equalsIgnoreCase("Exit")) {
+->>>>>>> main
+ 
+                 System.out.println("ARRIVEDERCI!!");
+ 
+@@ -235,6 +207,9 @@
+         }
+ 
+     }
+-
++    /*LocalDate inizioDate =LocalDate.of(2022,1,0);
++    LocalDate fineDate =LocalDate.of(2022,12,31);
++    Abitazione abitazione1= new Abitazione(12.3,inizioDate,fineDate,"Giovanni","via Rooma 3",4,15,2,"g.rossi@gmail.com");
++     */
+ }
+ 

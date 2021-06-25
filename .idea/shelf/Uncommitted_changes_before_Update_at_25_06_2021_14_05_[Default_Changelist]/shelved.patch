@@ -1,0 +1,179 @@
+Index: src/ProgettoDiGruppo/Classi/Utente/Prenotazione.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo.Classi.Utente;\r\n\r\nimport ProgettoDiGruppo.Classi.Abitazione.Abitazione;\r\n\r\n\r\nimport java.awt.event.PaintEvent;\r\nimport java.time.LocalDate;\r\n\r\nimport java.time.Period;\r\nimport java.time.temporal.ChronoUnit;\r\nimport java.util.Objects;\r\nimport java.util.UUID;\r\n\r\npublic class Prenotazione {\r\n\r\n    private String id;\r\n    private String emailUtente;\r\n    private Abitazione abitazione;\r\n    private double pagamento;\r\n    private int numeroGiorni;\r\n\r\n\r\n    /******* Costruttore *******/\r\n\r\n    public Prenotazione(LocalDate dataInizio, LocalDate dataFine, String emailUtente, Abitazione abitazione) {\r\n\r\n        numeroGiorni = Period.between(LocalDate.now().minusDays(30), LocalDate.now()).getDays();\r\n        pagamento = abitazione.getPrezzo() * numeroGiorni;\r\n        id = UUID.randomUUID().toString();\r\n        abitazione.getDurata().rimuoviDatePrenotate(dataInizio, dataFine);\r\n        abitazione.setNumDiVoltePrenotata();\r\n        add1Mese(dataInizio, dataFine);\r\n        this.emailUtente = emailUtente;\r\n        this.abitazione = abitazione;\r\n\r\n    }\r\n\r\n    /******* Getter e Setter *******/\r\n    //CONTROLLI, TO STRING /DATA INIZIO E FINE\r\n    public Abitazione getAbitazione() {\r\n        return abitazione;\r\n    }\r\n\r\n    public void setAbitazione(Abitazione abitazione) {\r\n        this.abitazione = abitazione;\r\n    }\r\n\r\n    public String getId() {\r\n        return id;\r\n    }\r\n\r\n    public String getEmailUtente() {\r\n        return emailUtente;\r\n    }\r\n\r\n    public void setEmailUtente(String emailUtente) {\r\n        this.emailUtente = emailUtente;\r\n    }\r\n\r\n    /******* Equals e Hashcode *******/\r\n    @Override\r\n    public boolean equals(Object o) {\r\n        if (this == o) return true;\r\n        if (o == null || getClass() != o.getClass()) return false;\r\n        Prenotazione that = (Prenotazione) o;\r\n        return Objects.equals(id, that.id);\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(id);\r\n    }\r\n\r\n\r\n    public void add1Mese(LocalDate dataInizioPren, LocalDate dataFinePren) {\r\n        if (dataInizioPren.getMonth().equals(dataFinePren.getMonth())) {\r\n            int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());\r\n            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn + 1);\r\n            return;\r\n        } else {\r\n            int numPrenMeseFin = abitazione.getMesiNumPrenotazioni().get(dataFinePren.getMonth());\r\n            abitazione.getMesiNumPrenotazioni().put(dataFinePren.getMonth(), numPrenMeseFin + 1);\r\n            int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());\r\n            abitazione.getMesiNumPrenotazioni().put(dataInizioPren.getMonth(), numPrenMeseIn + 1);\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Prenotazione{\" +\r\n                \"emailUtente='\" + emailUtente + '\\'' +\r\n                \", abitazione=\" + abitazione +\r\n                \", pagamento=\" + pagamento +\r\n                \", numeroGiorni=\" + numeroGiorni +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Classi/Utente/Prenotazione.java b/src/ProgettoDiGruppo/Classi/Utente/Prenotazione.java
+--- a/src/ProgettoDiGruppo/Classi/Utente/Prenotazione.java	(revision fbe52314d3527136a0e7c79e8a3649be1e5074db)
++++ b/src/ProgettoDiGruppo/Classi/Utente/Prenotazione.java	(date 1624618908703)
+@@ -57,6 +57,10 @@
+         this.emailUtente = emailUtente;
+     }
+ 
++    public int getNumeroGiorni() {
++        return numeroGiorni;
++    }
++
+     /******* Equals e Hashcode *******/
+     @Override
+     public boolean equals(Object o) {
+@@ -71,7 +75,7 @@
+         return Objects.hash(id);
+     }
+ 
+-
++    //aggiunge un mese anche nella mappa dell'utente
+     public void add1Mese(LocalDate dataInizioPren, LocalDate dataFinePren) {
+         if (dataInizioPren.getMonth().equals(dataFinePren.getMonth())) {
+             int numPrenMeseIn = abitazione.getMesiNumPrenotazioni().get(dataInizioPren.getMonth());
+@@ -86,6 +90,7 @@
+ 
+     }
+ 
++
+     @Override
+     public String toString() {
+         return "Prenotazione{" +
+Index: src/ProgettoDiGruppo/Classi/Utente/Utente.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo.Classi.Utente;\r\n\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\nimport java.util.Queue;\r\nimport java.util.regex.Pattern;\r\n\r\npublic class Utente {\r\n\r\n    private String nome;\r\n    private String cognome;\r\n    private String email;\r\n    private String indirizzo;\r\n    private String password;\r\n    private List<FeedBack> feedBacks = new LinkedList<>();\r\n    private Queue<Prenotazione> prenotazioni = new LinkedList<>();\r\n\r\n    /******* Costruttore *******/\r\n\r\n    public Utente(String nome, String cognome, String email, String indirizzo, String password) {\r\n\r\n        this.nome = nome;\r\n        this.cognome = cognome;\r\n        this.email = email;\r\n        this.indirizzo = indirizzo;\r\n        this.password = password;\r\n\r\n    }\r\n    //To string\r\n    /******* Getter e Setter *******/\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public void setNome(String nome) {\r\n\r\n        this.nome = nome;\r\n    }\r\n\r\n    public String getCognome() {\r\n        return cognome;\r\n    }\r\n\r\n    public void setCognome(String cognome) {\r\n        this.cognome = cognome;\r\n    }\r\n\r\n    public String getEmail() {\r\n        return email;\r\n    }\r\n\r\n    public void setEmail(String email) {\r\n\r\n        this.email = email;\r\n    }\r\n\r\n    public String getIndirizzo() {\r\n        return indirizzo;\r\n    }\r\n\r\n    public void setIndirizzo(String indirizzo) {\r\n        this.indirizzo = indirizzo;\r\n    }\r\n\r\n    public String getPassword() {\r\n        return password;\r\n    }\r\n\r\n    public void setPassword(String password) {\r\n        this.password = password;\r\n    }\r\n\r\n    public Queue<Prenotazione> getPrenotazioni() {\r\n        return prenotazioni;\r\n    }\r\n\r\n\r\n    /******* toString *******/\r\n    @Override\r\n    public String toString() {\r\n        return \"Utente{\" +\r\n                \"nome='\" + nome + '\\'' +\r\n                \", cognome='\" + cognome + '\\'' +\r\n                \", email='\" + email + '\\'' +\r\n                \", feedBacks=\" + feedBacks +\r\n                '}';\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Classi/Utente/Utente.java b/src/ProgettoDiGruppo/Classi/Utente/Utente.java
+--- a/src/ProgettoDiGruppo/Classi/Utente/Utente.java	(revision fbe52314d3527136a0e7c79e8a3649be1e5074db)
++++ b/src/ProgettoDiGruppo/Classi/Utente/Utente.java	(date 1624618908696)
+@@ -1,8 +1,7 @@
+ package ProgettoDiGruppo.Classi.Utente;
+ 
+-import java.util.LinkedList;
+-import java.util.List;
+-import java.util.Queue;
++import java.time.Month;
++import java.util.*;
+ import java.util.regex.Pattern;
+ 
+ public class Utente {
+@@ -12,9 +11,9 @@
+     private String email;
+     private String indirizzo;
+     private String password;
++    private int numeroPrenotazioniSvolte=0;
+     private List<FeedBack> feedBacks = new LinkedList<>();
+     private Queue<Prenotazione> prenotazioni = new LinkedList<>();
+-
+     /******* Costruttore *******/
+ 
+     public Utente(String nome, String cognome, String email, String indirizzo, String password) {
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Esercizio di Gruppo\r\n\r\n<img src=\"Hotel.jpg\"> \r\n\r\nUn facoltoso turista americano ci ha chiesto di creare una piattaforma ispirata ad un famoso sito per affittare\r\ncase vacanza. Tutti possono registrarsi alla piattaforma e, se approvati come host, caricare una o più abitazioni\r\ne specificare un prezzo, un periodo (data di inizio e data di fine) durante il quale l'abitazione è\r\nprenotabile da altri utenti. Ogni abitazione ha id, nome, indirizzo, numero di locali, numero di posti letto e piano.\r\nOgni utente ha nome cognome, email, indirizzo e ogni host ha un codice host. In più, un super-host è tale\r\nse ha ricevuto, da quando si è registrato, almeno 100 prenotazioni.\r\nDi ogni prenotazione si deve mantenere un id univoco, le date di inizio e fine, l'abitazione relativa e l'utente che\r\nha soggiornato. Ogni utente che ha soggiornato presso un abitazione può lasciare un feedback al proprietario\r\ndell'abitazione. Ogni feedback ha un id, un titolo, un testo e un punteggio (da 1 a 5).\r\nDeve essere possibile effettuare le seguenti operazioni nel sistema:\r\n\r\n- ottenere le abitazioni corrispondente ad un certo codice host\r\n- ottenere l'ultima prenotazione dato un id utente\r\n- ottenere l'abitazione più gettonata nell'ultimo mese\r\n- ottenere gli host con più prenotazioni nell'ultimo mese\r\n- ottenere tutti i super-host\r\n- ottenere i 5 utenti con più giorni prenotati nell'ultimo mese\r\n- ottenere il numero medio di posti letto calcolato in base a tutte le abitazioni caricate dagli host\r\n\r\n\r\nPer le date e i periodi potete utilizzare java.time.LocalDateTime e java.time.Duration\r\nesempio:\r\n\r\n`\r\nPeriod.between(aDate, sixtyDaysBehind);\r\n`\r\n\r\nNota: gestite tutto con le collection, nessun database (per ora!)\r\n\r\n# Schema del progetto\r\n<img src=\"Schema.png\"> 
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/README.md b/README.md
+--- a/README.md	(revision fbe52314d3527136a0e7c79e8a3649be1e5074db)
++++ b/README.md	(date 1624616721867)
+@@ -14,11 +14,11 @@
+ Deve essere possibile effettuare le seguenti operazioni nel sistema:
+ 
+ - ottenere le abitazioni corrispondente ad un certo codice host
+-- ottenere l'ultima prenotazione dato un id utente
++- ottenere l'ultima prenotazione dato un id utente 
+ - ottenere l'abitazione più gettonata nell'ultimo mese
+-- ottenere gli host con più prenotazioni nell'ultimo mese
++- ottenere gli host con più prenotazioni nell'ultimo mese 
+ - ottenere tutti i super-host
+-- ottenere i 5 utenti con più giorni prenotati nell'ultimo mese
++- ottenere i 5 utenti con più giorni prenotati nell'ultimo mese 
+ - ottenere il numero medio di posti letto calcolato in base a tutte le abitazioni caricate dagli host
+ 
+ 
+Index: src/ProgettoDiGruppo/Classi/Abitazione/Durata.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo.Classi.Abitazione;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.Month;\r\nimport java.time.Period;\r\nimport java.time.temporal.ChronoUnit;\r\nimport java.util.*;\r\n\r\n\r\npublic class Durata {\r\n\r\n    private LocalDate dataInizio;\r\n    private LocalDate dataFine;\r\n    private List<LocalDate> dates = new ArrayList<>();\r\n    Map<Month,Integer> mesiNumPrenotazioni = new HashMap<>();\r\n\r\n    public List<LocalDate> getDates() {\r\n        return dates;\r\n    }\r\n\r\n\r\n    public Durata(LocalDate dataInizio, LocalDate dataFine) {\r\n\r\n        this.dataInizio = dataInizio;\r\n        this.dataFine = dataFine;\r\n        riempiListaDate();\r\n\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Durata{\" +\r\n                \" dates=\" + dates +\r\n                '}';\r\n    }\r\n\r\n    /***** Getter e Setter ***/\r\n    public LocalDate getDataInizio() {\r\n        return dataInizio;\r\n    }\r\n\r\n    public void setDataInizio(LocalDate dataInizio) {\r\n        this.dataInizio = dataInizio;\r\n    }\r\n\r\n    public LocalDate getDataFine() {\r\n        return dataFine;\r\n    }\r\n\r\n    public void setDataFine(LocalDate dataFine) {\r\n        this.dataFine = dataFine;\r\n    }\r\n\r\n    public void CalendarioDisponibilita() {\r\n\r\n    }\r\n\r\n\r\n    public void riempiListaDate() {\r\n        for (LocalDate d = dataInizio; !d.isAfter(dataFine); d = d.plusDays(1)) {\r\n            dates.add(d);\r\n        }\r\n    }\r\n\r\n    public boolean isDataDisponibile(LocalDate dataInizioPren, LocalDate dataFinePren){\r\n\r\n        List<LocalDate> giorniDaPrenotare = new ArrayList<>();\r\n\r\n        for (LocalDate d = dataInizioPren; !d.isAfter(dataFinePren); d = d.plusDays(1)) {\r\n\r\n            giorniDaPrenotare.add(d);\r\n\r\n        }\r\n\r\n        if(dates.contains(giorniDaPrenotare))\r\n\r\n            return true;\r\n\r\n        return false;\r\n\r\n\r\n    }\r\n\r\n    public void rimuoviDatePrenotate(LocalDate dataInizioPren, LocalDate dataFinePren) {\r\n        List<LocalDate> datePrenotate = new ArrayList<>();\r\n        for (LocalDate d = dataInizioPren; !d.isAfter(dataFinePren); d = d.plusDays(1)) {\r\n            datePrenotate.add(d);\r\n        }\r\n        if (dates.containsAll(datePrenotate)) {\r\n            dates.removeAll(datePrenotate);\r\n            System.out.println(\"Hai rimosso le date\");\r\n        } else System.out.println(\"le date scelte non sono contenute\");\r\n\r\n    }\r\n\r\n\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Classi/Abitazione/Durata.java b/src/ProgettoDiGruppo/Classi/Abitazione/Durata.java
+--- a/src/ProgettoDiGruppo/Classi/Abitazione/Durata.java	(revision fbe52314d3527136a0e7c79e8a3649be1e5074db)
++++ b/src/ProgettoDiGruppo/Classi/Abitazione/Durata.java	(date 1624618644252)
+@@ -97,4 +97,6 @@
+ 
+ 
+ 
++
++
+ }
+Index: src/ProgettoDiGruppo/Classi/Gestione/DataBase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo.Classi.Gestione;\r\n\r\nimport ProgettoDiGruppo.Classi.Abitazione.Abitazione;\r\nimport ProgettoDiGruppo.Classi.Utente.Host;\r\nimport ProgettoDiGruppo.Classi.Utente.Utente;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.Month;\r\nimport java.util.*;\r\n\r\npublic class DataBase {\r\n\r\n    private Map<String, Set<Abitazione>> caseInseriteDallHost; // STRING == CODICE HOST\r\n    private Map<String, Set<Abitazione>> casePerComune; //STRING, serve per facilitare la ricerca in AzioniUtente nel metodo ritronaStanzeDalleSpecifiche\r\n    private Map<String, Utente> utentiInseriti; //STRING == EMAIL UTENTE\r\n    private Map<String, Host> hostInseriti;\r\n\r\n    private int mediaPostiLetto;\r\n    private int numeroAbitazioniInserite = 0;\r\n\r\n    private static DataBase instance = null;\r\n\r\n    private DataBase() {\r\n\r\n        caseInseriteDallHost = new HashMap<>(); // STRING == CODICE HOST\r\n        utentiInseriti = new HashMap<>(); //STRING == EMAIL UTENTE\r\n        hostInseriti = new HashMap<>();\r\n        casePerComune = new HashMap<>();\r\n        inserimentoDati();\r\n\r\n    }\r\n\r\n    public static DataBase getInstance() {\r\n\r\n        if (instance == null) {\r\n\r\n            instance = new DataBase();\r\n\r\n        }\r\n\r\n        return instance;\r\n\r\n    }\r\n\r\n    public void addUtente(Utente utente) {\r\n\r\n        utentiInseriti.put(utente.getEmail(), utente);\r\n\r\n    }\r\n\r\n    public void addHost(Host host) {\r\n\r\n        hostInseriti.put(host.getEmail(), host);\r\n\r\n    }\r\n\r\n    public void addCasa(Host host, Abitazione abitazione) {\r\n\r\n        Set<Abitazione> abitazioni = caseInseriteDallHost.getOrDefault(host.getEmail(), new HashSet<>());\r\n        abitazioni.add(abitazione);\r\n        caseInseriteDallHost.put(host.getEmail(), abitazioni);\r\n\r\n        mediaPostiLetto += abitazione.getNumeroPostiLetto();\r\n        numeroAbitazioniInserite++;\r\n\r\n    }\r\n\r\n    public void addCasaPerComune(String comune, Abitazione abitazione) {\r\n\r\n        Set<Abitazione> abitazioni = casePerComune.getOrDefault(comune, new HashSet<>());\r\n        abitazioni.add(abitazione);\r\n        casePerComune.put(comune, abitazioni);\r\n\r\n    }\r\n\r\n    public int mediaPostiLetto() {\r\n\r\n        return (mediaPostiLetto / numeroAbitazioniInserite);\r\n\r\n    }\r\n\r\n\r\n\r\n    public Abitazione casaGettonata() {\r\n        LocalDate dataAttuale = LocalDate.now();\r\n        Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();\r\n        Abitazione abitazioGettonata = null;\r\n        int max = 0;\r\n        for (String emailHost : caseInseriteDallHost.keySet()) {\r\n            for (Abitazione abit : caseInseriteDallHost.get(emailHost)) {\r\n                if (abit.getMesiNumPrenotazioni().get(mesePrecendente) > max) {\r\n                    max = abit.getMesiNumPrenotazioni().get(mesePrecendente);\r\n                    abitazioGettonata = abit;\r\n                }\r\n            }\r\n        }\r\n        return  abitazioGettonata;\r\n\r\n    }\r\n\r\n\r\n    public Map<String, Set<Abitazione>> getCaseInseriteDallHost() {\r\n        return caseInseriteDallHost;\r\n    }\r\n\r\n    public Map<String, Utente> getUtentiInseriti() {\r\n        return utentiInseriti;\r\n    }\r\n\r\n    public Map<String, Host> getHostInseriti() {\r\n        return hostInseriti;\r\n    }\r\n\r\n    public Map<String, Set<Abitazione>> getCasePerComune() {\r\n\r\n        return casePerComune;\r\n\r\n    }\r\n\r\n    private void inserimentoDati(){\r\n\r\n        Utente utente1 = new Utente(\"Raffaele\", \"Pellecchia\",\"raffaelepellecchia@gmail.com\", \"Via tree 3\", \"Raffaele\");\r\n        Host host1 = new Host(utente1);\r\n        utentiInseriti.put(utente1.getEmail(), utente1);\r\n        hostInseriti.put(host1.getEmail(), host1);\r\n\r\n\r\n        Utente utente2 = new Utente(\"Daniele\", \"Iuliano\",\"danieleIuliano@gmail.com\", \"Via horse 3\", \"Daniele\");\r\n        Host host2 = new Host(utente2);\r\n        utentiInseriti.put(utente2.getEmail(), utente2);\r\n        hostInseriti.put(utente2.getEmail(), host2);\r\n\r\n\r\n        Utente utente3 = new Utente(\"Giovanni\", \"Cidu\",\"giovanniCidu@gmail.com\", \"Via mariss 3\", \"Giovanni\");\r\n        Host host3 = new Host(utente2);\r\n        utentiInseriti.put(utente3.getEmail(), utente3);\r\n        hostInseriti.put(host3.getEmail(), host3);\r\n\r\n        LocalDate inizioDate =LocalDate.of(2021,10,3);\r\n        LocalDate fineDate =LocalDate.of(2021,12,31);\r\n        Abitazione abitazione1= new Abitazione(50.3,inizioDate,fineDate,\"Appartamento a via Roma\",\"via Roma 3\",10,15,2,\"raffaelepellecchia@gmail.com\");\r\n\r\n        inizioDate =LocalDate.of(2021,8,3);\r\n        fineDate =LocalDate.of(2021,10,1);\r\n        Abitazione abitazione2 = new Abitazione(12.3,inizioDate,fineDate,\"Appartamento Puglia\",\"Strada Rodi XXI\",2,1,1,\"raffaelepellecchia@gmail.com\");\r\n\r\n        inizioDate =LocalDate.of(2021,11,3);\r\n        fineDate =LocalDate.of(2021,12,1);\r\n        Abitazione abitazione3 = new Abitazione(21.2,inizioDate,fineDate,\"Appartamento trentino\",\"Strada treno I\",2,3,1,\"raffaelepellecchia@gmail.com\");\r\n\r\n        inizioDate =LocalDate.of(2021,10,3);\r\n        fineDate =LocalDate.of(2021,10,20);\r\n        Abitazione abitazione4 = new Abitazione(21.2,inizioDate,fineDate,\"Appartamento di Giovanni\",\"Strada no I\",2,3,1,\"giovanniCidu@gmail.com\");\r\n\r\n        addCasa(host1, abitazione1);\r\n        addCasa(host1, abitazione2);\r\n        addCasa(host1, abitazione3);\r\n        addCasaPerComune(\"Napoli\", abitazione1);\r\n        addCasaPerComune(\"Assisi\", abitazione2);\r\n        addCasaPerComune(\"Campobasso\", abitazione3);\r\n        addCasa(host3, abitazione4);\r\n        addCasaPerComune(\"Villachiara\", abitazione4);\r\n\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Classi/Gestione/DataBase.java b/src/ProgettoDiGruppo/Classi/Gestione/DataBase.java
+--- a/src/ProgettoDiGruppo/Classi/Gestione/DataBase.java	(revision fbe52314d3527136a0e7c79e8a3649be1e5074db)
++++ b/src/ProgettoDiGruppo/Classi/Gestione/DataBase.java	(date 1624622703715)
+@@ -98,6 +98,28 @@
+ 
+     }
+ 
++    public Host hostPiuPrenotazioniUltimoMese() {
++        LocalDate dataAttuale = LocalDate.now();
++        Month mesePrecendente = dataAttuale.minusMonths(1).getMonth();
++        Host hostPiuGettonato = null;
++        int max = 0;
++        int utentiHost = 0;
++        for (String emailHost : caseInseriteDallHost.keySet()) {
++            for (Abitazione abit : caseInseriteDallHost.get(emailHost)) {
++                if (abit.getMesiNumPrenotazioni().get(mesePrecendente) > max) {
++                    max = abit.getMesiNumPrenotazioni().get(mesePrecendente);
++
++                }
++            }
++            if(max>utentiHost){
++                utentiHost=max;
++                hostPiuGettonato=hostInseriti.get(emailHost);
++            }
++        }
++        return  hostPiuGettonato;
++
++    }
++
+ 
+     public Map<String, Set<Abitazione>> getCaseInseriteDallHost() {
+         return caseInseriteDallHost;
+Index: src/ProgettoDiGruppo/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo;\r\n\r\nimport ProgettoDiGruppo.Classi.Abitazione.Abitazione;\r\nimport ProgettoDiGruppo.Classi.Abitazione.Durata;\r\nimport ProgettoDiGruppo.Classi.Gestione.AzioniHost;\r\nimport ProgettoDiGruppo.Classi.Gestione.AzioniUtente;\r\nimport ProgettoDiGruppo.Classi.Gestione.Gestione;\r\nimport ProgettoDiGruppo.Classi.Utente.Host;\r\nimport ProgettoDiGruppo.Classi.Utente.Prenotazione;\r\nimport ProgettoDiGruppo.Classi.Utente.Utente;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.Period;\r\nimport java.util.Date;\r\nimport java.util.Scanner;\r\nimport java.util.Set;\r\n\r\npublic class Main {\r\n\r\n    public static void main(String[] args) {\r\n\r\n        Gestione gestione = new Gestione();\r\n        Scanner scanner = new Scanner(System.in);\r\n        String scelta;\r\n        String tipoUtente;\r\n        Utente utente = null;\r\n        Host host = null;\r\n\r\n        while (true) {\r\n            System.out.print(\"Benvenuto in Booking\\nChe ruolo hai?\\n|Host|\\n|Utente|\\n|Exit|\\nScelta: \");\r\n            tipoUtente = scanner.next();\r\n\r\n            if (tipoUtente.equalsIgnoreCase(\"Utente\")) {\r\n                while (true) {\r\n\r\n                    if (utente == null) {\r\n\r\n                        System.out.println(\"|Registrazione|\\n|Accesso|\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Registrazione\")) {\r\n\r\n                            gestione.registrazione();\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Accesso\")) {\r\n\r\n                            utente = gestione.accesso();\r\n\r\n                            if (utente == null) {\r\n\r\n                                System.out.println(\"Accesso non riuscito, se non sei ancora registrato registrati!\");\r\n                                continue;\r\n\r\n                            } else {\r\n\r\n                                System.out.println(\"Accesso effettuato\");\r\n                                continue;\r\n\r\n                            }\r\n\r\n                        }\r\n\r\n                    } else {\r\n\r\n                        AzioniUtente azioniUtente = new AzioniUtente();\r\n                        System.out.println(\"Cosa vuoi fare: \\n|Prenotazione| Per prenotare una abitazione\\n|UltimaPrenotazione| Per visualizzare l'ultima prenotazione fatta\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Prenotazione\")) {\r\n\r\n                            azioniUtente.prenotaAbitazione(utente);\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"UtlimaPrenotazione\")) {\r\n\r\n                            Prenotazione prenotazione = azioniUtente.ultimaPrenotazioneUtente(utente);\r\n                            if (prenotazione == null) {\r\n\r\n                                System.out.println(\"Devi prima effettuare una prenotazione!\");\r\n                                continue;\r\n\r\n                            }\r\n\r\n                            System.out.println(prenotazione.toString());\r\n\r\n                            continue;\r\n\r\n                        }\r\n\r\n                    }\r\n\r\n                    if (scelta.equalsIgnoreCase(\"Exit\")) {\r\n\r\n                        System.out.println(\"ARRIVEDERCI!!\");\r\n                        break;\r\n\r\n                    } else {\r\n\r\n                        System.out.println(\"Scelta non valida!\");\r\n                        continue;\r\n\r\n                    }\r\n\r\n                }\r\n\r\n            } else if (tipoUtente.equalsIgnoreCase(\"Host\")) {\r\n\r\n                while (true) {\r\n\r\n                    if (host == null) {\r\n\r\n                        System.out.println(\"|Registrazione|\\n|Accesso|\\n|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Registrazione\")) {\r\n\r\n                            gestione.registrazione();\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"Accesso\")) {\r\n\r\n                            host = gestione.accessoHost();\r\n\r\n                            if (utente == null) {\r\n\r\n                                System.out.println(\"Accesso non riuscito, se non sei ancora registrato registrati!\");\r\n                                continue;\r\n\r\n                            } else {\r\n\r\n                                System.out.println(\"Accesso effettuato\");\r\n                                continue;\r\n\r\n                            }\r\n\r\n                        }\r\n\r\n                    } else {\r\n\r\n                        AzioniHost azioniHost = new AzioniHost();\r\n                        System.out.println(\"Cosa vuoi fare: \\n|InserisciAbitazione| Per inserire un'abitazione\\n|AbitazioniHost| Abitazione per l'host\\n|SuperHost| Visualizza tutti i super host\\n|MediaPostiLetto| Per vedere la media dei posti letto|Exit|\");\r\n                        System.out.print(\"Scelta: \");\r\n                        scelta = scanner.next();\r\n\r\n                        if (scelta.equalsIgnoreCase(\"InserisciAbitazione\")) {\r\n\r\n                            azioniHost.inserisciAbitazione(host);\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"AbitazioniHost\")) {\r\n\r\n                            Set<Abitazione> abitazioniHost = azioniHost.abitazioniPerHost(host.getEmail());\r\n\r\n                            for (Abitazione abitazione : abitazioniHost) {\r\n\r\n                                System.out.println(abitazione.toString());\r\n\r\n                            }\r\n                            continue;\r\n\r\n                        }\r\n\r\n                        if (scelta.equalsIgnoreCase(\"SuperHost\")) {\r\n\r\n                            Set<Host> superHost = azioniHost.ritornaSuperHost();\r\n\r\n                            for (Host hosts : superHost) {\r\n\r\n                                System.out.println(hosts.toString());\r\n\r\n                            }\r\n                            continue;\r\n                        }\r\n\r\n\r\n                        if (scelta.equalsIgnoreCase(\"MediaPostiLetto\")) {\r\n\r\n                            System.out.println(\"La media è: \"+ azioniHost.numeroMedioPostiLetto());\r\n                            continue;\r\n\r\n                        }\r\n\r\n\r\n                    }\r\n\r\n\r\n                    if (scelta.equalsIgnoreCase(\"Exit\")) {\r\n\r\n                        break;\r\n\r\n                    } else {\r\n\r\n                        System.out.println(\"Scelta non valida!\");\r\n                        continue;\r\n\r\n                    }\r\n\r\n                }\r\n\r\n            }\r\n\r\n            if (tipoUtente.equalsIgnoreCase(\"Exit\")) {\r\n\r\n                System.out.println(\"ARRIVEDERCI!!\");\r\n\r\n                break;\r\n\r\n            }\r\n\r\n        }\r\n\r\n    }\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Main.java b/src/ProgettoDiGruppo/Main.java
+--- a/src/ProgettoDiGruppo/Main.java	(revision fbe52314d3527136a0e7c79e8a3649be1e5074db)
++++ b/src/ProgettoDiGruppo/Main.java	(date 1624615472891)
+@@ -1,17 +1,12 @@
+ package ProgettoDiGruppo;
+ 
+ import ProgettoDiGruppo.Classi.Abitazione.Abitazione;
+-import ProgettoDiGruppo.Classi.Abitazione.Durata;
+ import ProgettoDiGruppo.Classi.Gestione.AzioniHost;
+ import ProgettoDiGruppo.Classi.Gestione.AzioniUtente;
+ import ProgettoDiGruppo.Classi.Gestione.Gestione;
+ import ProgettoDiGruppo.Classi.Utente.Host;
+ import ProgettoDiGruppo.Classi.Utente.Prenotazione;
+ import ProgettoDiGruppo.Classi.Utente.Utente;
+-
+-import java.time.LocalDate;
+-import java.time.Period;
+-import java.util.Date;
+ import java.util.Scanner;
+ import java.util.Set;
+ 

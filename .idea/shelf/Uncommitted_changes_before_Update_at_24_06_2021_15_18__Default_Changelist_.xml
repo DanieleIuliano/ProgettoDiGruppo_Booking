@@ -1,0 +1,49 @@
+<changelist name="Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]" date="1624540698333" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 24/06/2021 15:18 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Abitazione/Abitazione.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Abitazione/Abitazione.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Abitazione.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Abitazione/Durata.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Abitazione/Durata.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Durata.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Main.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Gestione/Gestione.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Gestione/Gestione.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Gestione.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/FeedBack.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/FeedBack.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/FeedBack.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/Utente.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/Utente.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Utente.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/Host.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/Host.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Host.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/Prenotazione.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Utente/Prenotazione.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/Prenotazione.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Gestione/DataBase.class" />
+    <option name="AFTER_PATH" value="out/production/ProgettoDiGruppo_Booking/ProgettoDiGruppo/Classi/Gestione/DataBase.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_06_2021_15_18_[Default_Changelist]/DataBase.class" />
+  </binary>
+</changelist>

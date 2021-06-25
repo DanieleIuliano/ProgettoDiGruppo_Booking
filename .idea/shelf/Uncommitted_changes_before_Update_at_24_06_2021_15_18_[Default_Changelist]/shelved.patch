@@ -1,0 +1,30 @@
+Index: src/ProgettoDiGruppo/Classi/Utente/Host.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ProgettoDiGruppo.Classi.Utente;\r\n\r\nimport ProgettoDiGruppo.Classi.Abitazione.Abitazione;\r\n\r\nimport java.util.HashSet;\r\nimport java.util.Set;\r\nimport java.util.UUID;\r\n\r\npublic class Host extends Utente {\r\n\r\n    private String codiceHost;\r\n    private int numeroPrenotazioni = 0;\r\n    private boolean superHost = false;\r\n    private Set<Abitazione> abitazioni = new HashSet<>();\r\n\r\n    /******* Costruttore *******/\r\n\r\n    public Host(String nome, String cognome, String email, String indirizzo,String password) {\r\n\r\n        super(nome, cognome, email, indirizzo,password);\r\n        codiceHost = UUID.randomUUID().toString();\r\n\r\n    }\r\n\r\n    \r\n    /******* Getter e Setter *******/\r\n\r\n    public String getCodiceHost() {\r\n        return codiceHost;\r\n    }\r\n\r\n    public void setCodiceHost(String codiceHost) {\r\n        this.codiceHost = codiceHost;\r\n    }\r\n\r\n    public int getNumeroPrenotazioni() {\r\n        return numeroPrenotazioni;\r\n    }\r\n\r\n    public void setNumeroPrenotazioni(int numeroPrenotazioni) {\r\n        this.numeroPrenotazioni = numeroPrenotazioni;\r\n    }\r\n\r\n    public boolean isSuperHost() {\r\n        return superHost;\r\n    }\r\n\r\n    public void setSuperHost(boolean superHost) {\r\n        this.superHost = superHost;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ProgettoDiGruppo/Classi/Utente/Host.java b/src/ProgettoDiGruppo/Classi/Utente/Host.java
+--- a/src/ProgettoDiGruppo/Classi/Utente/Host.java	(revision 23ed935dc793961491f02a364ba9d338214f8eff)
++++ b/src/ProgettoDiGruppo/Classi/Utente/Host.java	(date 1624539311375)
+@@ -13,8 +13,6 @@
+     private boolean superHost = false;
+     private Set<Abitazione> abitazioni = new HashSet<>();
+ 
+-    /******* Costruttore *******/
+-
+     public Host(String nome, String cognome, String email, String indirizzo,String password) {
+ 
+         super(nome, cognome, email, indirizzo,password);
+@@ -22,9 +20,7 @@
+ 
+     }
+ 
+-    
+-    /******* Getter e Setter *******/
+-
++    // Varie cose
+     public String getCodiceHost() {
+         return codiceHost;
+     }
